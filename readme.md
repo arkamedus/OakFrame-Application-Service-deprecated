@@ -20,3 +20,4 @@ The build process involves typescript compilation, google closure compilation, a
 `./scripts/test.sh` \
 or something like this if that doesn't work\
 `node /usr/local/lib/node_modules/mocha/bin/_mocha -r ts-node/register --ui bdd */**/*.spec.ts`
+

@@ -12,6 +12,9 @@ fi
 echo Rebuilding Directories.
 mkdir tmp/
 mkdir release/
+mkdir release/client/
+mkdir release/lambda/
+mkdir release/shared/
 
 echo Compiling Typescript.
 tsc --p tsconfig.json
@@ -19,7 +22,6 @@ tsc --p tsconfig.json
 
 echo Compiling JavaScript.
 #/client/
-mkdir release/client/
 cd tmp/client
 webpack
 cd ../../
@@ -28,8 +30,13 @@ cp client/index.html release/client/index.html
 
 
 #/lambda/
-#mkdir release/lambda/
-#java -jar node_modules/google-closure-compiler/compiler.jar --warning_level=VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS --language_in ECMASCRIPT6 --language_out ECMASCRIPT5 --js_output_file=release/lambda/app.js utils/externs.js 'tmp/interface/**.js' 'tmp/model/**.js' 'tmp/lambda/app.js'
+mkdir release/lambda/
+cp -r tmp/lambda/ release/lambda/
+#java -jar node_modules/google-closure-compiler/compiler.jar --warning_level=VERBOSE --compilation_level ADVANCED_OPTIMIZATIONS --language_in ECMASCRIPT6 --language_out ECMASCRIPT5 --js_output_file=release/lambda/app.js utils/externs.js 'tmp/shared/interface/**.js' 'tmp/shared/model/**.js' 'tmp/lambda/**.js'
+
+#/shared/
+mkdir release/shared/
+cp -r tmp/shared/ release/shared/
 
 echo Compilation Complete. Cleaning Up.
 #if [ -d tmp/ ];then

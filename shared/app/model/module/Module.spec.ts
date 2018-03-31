@@ -1,6 +1,6 @@
 ///<reference path="./Module.ts"/>
 import {expect} from 'chai';
-import {Module} from "./Module.ts";
+import {Module} from "./Module";
 
 
 describe('Module', () => {
