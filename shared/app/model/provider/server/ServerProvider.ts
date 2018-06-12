@@ -36,8 +36,8 @@ export class ServerProvider implements Provider, Rest {
         this._endpoint.route(request, response);
     }
 
-    define(slug, response): any {
-        this._endpoint.define(slug, response);
+    define(route, response): any {
+        this._endpoint.define(route, response);
     }
 
     then(): any {

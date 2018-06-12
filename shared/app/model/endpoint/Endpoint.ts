@@ -7,24 +7,40 @@ export class Endpoint {
     }
 
     route(request, response) {
-        if (!this._routes[request.url]) {
-            response.end(JSON.stringify({
-                err: true,
-                url: request.url,
-                message: `No routes defined for Endpoint`,
-                headers: request.headers
-            }));
-            return;
+
+        for (let i = 0; i < this._routes.length; i++) {
+            let route = this._routes[i];
+            let match = request.url.match(route.route);
+            if (match) {
+                request.params = match.slice(1);
+                try {
+                    return route.handler(request, response);
+                } catch (err) {
+                    console.log(err.stack);
+                    return response.end(JSON.stringify({ // 500
+                        err: true,
+                        url: request.url,
+                        message: `No matching Endpoints found`,
+                        headers: request.headers
+                    }));
+                }
+            }
         }
-        return (this._routes[request.url](response))
+
+        response.end(JSON.stringify({ // 404
+            err: true,
+            url: request.url,
+            message: `No routes defined for Endpoint`,
+            headers: request.headers
+        }));
     }
 
-    define(slug: string, callback: any) {
-        // if (this._routes[slug]){
-        //   callback();
-        // }
-        this._routes[slug] = callback;
-    }
+    define(route: any, handler: any) {
 
+        if (!(route instanceof RegExp)) {
+            route = new RegExp("^" + route + "$")
+        }
+        this._routes.push({route: route, handler: handler});
+    }
 
 }
