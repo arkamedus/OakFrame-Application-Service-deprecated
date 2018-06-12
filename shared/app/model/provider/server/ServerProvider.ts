@@ -1,29 +1,63 @@
+import {Endpoint} from "../../endpoint/Endpoint";
 export class ServerProvider implements Provider, Rest {
 
-	private _url:string;
+    private _url: string;
+    private http;
+    private port: number;
+    private server;
+    private _endpoint: Endpoint;
 
-	constructor (url:string){
-		this._url = url;
-	}
+    constructor(endpoint: Endpoint) {
 
-	get(instance: any): any {
-		return instance;
-	}
+        this.http = require('http');
+        this.port = 3000;
+        this._endpoint = endpoint;
 
-	route(item: any): any {
-		return item;
-	}
+        const requestHandler = (request, response) => {
+            this.route(request, response);
+        };
 
-	then(): any {
-		return undefined;
-	}
+        this.server = this.http.createServer(requestHandler);
 
-	error(): any {
-		return undefined;
-	}
+        this.server.listen(this.port, (err) => {
+            if (err) {
+                return console.log(err)
+            }
 
-	end(): any {
-		return undefined;
-	}
+            console.log(`HTTPServer is listening on port ${this.port}`)
+        })
+    }
+
+    get(instance: any): any {
+        return instance;
+    }
+
+    route(request, response): any {
+        this._endpoint.route(request, response);
+    }
+
+    define(slug, response): any {
+        this._endpoint.define(slug, response);
+    }
+
+    then(): any {
+        return undefined;
+    }
+
+    error(): any {
+        return undefined;
+    }
+
+    end(): any {
+        return undefined;
+    }
+
+    close(callback): any {
+        if (this.server) {
+            this.server.close(function () {
+                callback();
+            });
+        }
+    }
 
 }

@@ -1,6 +1,7 @@
 ///<reference path="../shared/app/model/endpoint/Endpoint.ts"/>
 
-import {StaticProvider} from "../shared/app/model/provider/static/StaticProvider";
+import {ServerProvider} from "../shared/app/model/provider/server/ServerProvider";
 import {Endpoint} from "../shared/app/model/endpoint/Endpoint";
 
-let server = new Endpoint(new StaticProvider());
+let server = new Endpoint(new ServerProvider('localhost'));
+

@@ -18,6 +18,7 @@
     "chai": "^4.1.2",
     "google-closure-compiler": "^20180319.0.0",
     "nyc": "^11.6.0",
+    "request": "^2.87.0",
     "typings": "^2.1.1"
   }
 }

@@ -5,10 +5,10 @@ export class Subscribe {
 	packet(identifier):any{
 		return this._subscribers[identifier];
 	}
-	subscribe():any{
-
+	subscribe(slug, callback):any{
+		this._subscribers[slug] = callback;
 	}
-	publish():any{
+	publish(slug, ):any{
 
 	}
 }

@@ -1,3 +1,3 @@
 interface Rest {
-	route(item:any):any;
+	route(request,response):any;
 }

@@ -6,25 +6,25 @@ import {AmazonWebService} from "../AmazonWebService";
 
 describe('DynamoDB', () => {
 
-	let aws = new AmazonWebService();
-	let dynamoDB = new aws.AWS.DynamoDB({apiVersion: '2012-10-08'});
-	it('should be created', () => {
+    /*let aws = new AmazonWebService();
+     let dynamoDB = new aws.AWS.DynamoDB({apiVersion: '2012-10-08'});
+     it('should be created', () => {
 
-	});
+     });
 
-	it('should get a list of tables', (done) => {
-		dynamoDB.listTables({Limit: 10}, function (err, data) {
-			expect(err).equal(null);
-			if (err) {
-				console.log("Error", err.code);
-			} else {
-				expect(data.TableNames).to.be.an('array')
-			}
+     it('should get a list of tables', (done) => {
+     dynamoDB.listTables({Limit: 10}, function (err, data) {
+     expect(err).equal(null);
+     if (err) {
+     console.log("Error", err.code);
+     } else {
+     expect(data.TableNames).to.be.an('array')
+     }
 
-			done();
-		});
+     done();
+     });
 
 
-	});
+     });*/
 
 });
