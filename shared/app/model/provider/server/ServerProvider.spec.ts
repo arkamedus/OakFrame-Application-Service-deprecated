@@ -18,13 +18,13 @@ describe('ServerProvider', () => {
             if (err) {
                 return console.log(err);
             }
-            expect(body.err).equal(true);
+            expect(res.statusCode).equal(404);
             done();
         });
     });
 
     it('should route a root request', (done) => {
-        serverProvider.define('/', function (response) {
+        serverProvider.define('/', function (request, response) {
             response.end(JSON.stringify({err: false, response: response.url}));
         });
 

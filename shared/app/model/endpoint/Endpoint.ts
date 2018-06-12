@@ -27,6 +27,8 @@ export class Endpoint {
             }
         }
 
+        response.statusCode = 404;
+        response.setHeader('Content-Type', 'application/json');
         response.end(JSON.stringify({ // 404
             err: true,
             url: request.url,
