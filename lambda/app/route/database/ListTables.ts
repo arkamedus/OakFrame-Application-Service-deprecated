@@ -1,5 +1,5 @@
-import {AmazonWebService} from "../../../../shared/app/model/aws/AmazonWebService";
-import {DynamoDB} from "../../../../shared/app/model/aws/dynamodb/DynamoDB";
+import {AmazonWebService} from "../../../../lib/model/aws/AmazonWebService";
+import {DynamoDB} from "../../../../lib/model/aws/dynamodb/DynamoDB";
 
 let aws = new AmazonWebService();
 

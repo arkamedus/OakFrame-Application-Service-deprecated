@@ -1,4 +1,8 @@
+///<reference path="../../../interface/Provider.ts"/>
+///<reference path="../../../interface/Rest.ts"/>
+
 import {Endpoint} from "../../endpoint/Endpoint";
+import {Provider} from "../../../interface/Provider";
 export class ServerProvider implements Provider, Rest {
 
     private _url: string;

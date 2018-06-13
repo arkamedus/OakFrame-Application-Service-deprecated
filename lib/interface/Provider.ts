@@ -1,5 +1,8 @@
+///<reference path="../model/endpoint/Endpoint.ts"/>
+import {Endpoint} from "../model/endpoint/Endpoint";
+
 //** @interface Provider is like a serializable promise
-interface Provider {
+export interface Provider {
     then(): any;
     error(): any;
     end(): any;

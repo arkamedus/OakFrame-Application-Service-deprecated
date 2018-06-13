@@ -1,7 +1,7 @@
-///<reference path="../shared/app/model/endpoint/Endpoint.ts"/>
+///<reference path="../lib/model/endpoint/Endpoint.ts"/>
 
-import {ServerProvider} from "../shared/app/model/provider/server/ServerProvider";
-import {Endpoint} from "../shared/app/model/endpoint/Endpoint";
+import {ServerProvider} from "../lib/model/provider/server/ServerProvider";
+import {Endpoint} from "../lib/model/endpoint/Endpoint";
 
-let server = new Endpoint(new ServerProvider('localhost'));
+let server = new ServerProvider(new Endpoint());
 

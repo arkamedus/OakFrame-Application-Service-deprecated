@@ -1,4 +1,4 @@
-import {Template} from "../../../shared/app/model/template/Template";
+import {Template} from "../../../lib/model/template/Template";
 
 export class Landing extends Template {
     constructor() {

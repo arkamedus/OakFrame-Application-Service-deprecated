@@ -1,8 +1,12 @@
-import {Kernel} from "../shared/app/model/Kernel";
-import {Module} from "../shared/app/model/module/Module";
+///<reference path="../lib/model/Kernel.ts"/>
+///<reference path="../lib/model/module/Module.ts"/>
+///<reference path="../lib/model/socket/Socket.ts"/>
+
+import {Kernel} from "../lib/model/Kernel";
+import {Module} from "../lib/model/module/Module";
 import {Entry} from "./app/controller/Entry/Entry";
 import {Landing} from "./app/view/Landing";
-import {Socket} from "../shared/app/model/socket/Socket";
+import {Socket} from "../lib/model/socket/Socket";
 
 let kernel = <Kernel>new Kernel();
 let entry = <Module>new Entry();
@@ -19,6 +23,8 @@ let landing = new Landing();
 
 document.body.innerHTML = landing.getContents();
 
-//let socket = <Socket>new Socket();
 
-//socket.connect('wss://a3gd91vdmo74np.iot.us-east-1.amazonaws.com');
+
+let socket = <Socket>new Socket();
+
+socket.connect('ws://localhost:3001');

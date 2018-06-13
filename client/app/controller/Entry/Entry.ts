@@ -1,4 +1,4 @@
-import {Module} from "../../../../shared/app/model/module/Module";
+import {Module} from "../../../../lib/model/module/Module";
 
 export class Entry extends Module {
 

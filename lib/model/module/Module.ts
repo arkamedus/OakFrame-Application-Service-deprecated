@@ -1,3 +1,7 @@
+///<reference path="../../../lib/interface/Provider.ts"/>
+
+import {Provider} from "../../interface/Provider";
+
 /** @class Module **/
 export class Module {
 
