@@ -6,8 +6,11 @@ These steps will install ts-node ,typescript, mocha and chai globally `-g`. \
 `npm install -g typescript` \
 `npm install mocha chai ts-node -g` \
 `npm install mocha chai ts-node --save-dev` \
-`npm install @types/node @types/chai @types/mocha --save-dev`
-`npm install webpack webpack-cli -g`
+`npm install @types/node @types/chai @types/mocha --save-dev` \
+`npm install webpack webpack-cli -g` \
+`pip install awscli` \
+`aws configure`
+Now, you will need to log in to AWS > IAM > Users and generate/create Security Credentials Access Key and input them into the prompt. \
 
 ##Building
 Ensure that your permissions are correct for executing scripts\

@@ -21,12 +21,12 @@ export class Socket {
             }))
         };
         this._socket.onmessage = function (e) {
-            _socket.publish(JSON.parse(e.data));
+            _socket.publish(JSON.parse(e.data), this);
         };
         this._socket.onerror = function (e) {
             _socket.publish({
                 "err": 'Error connecting to websocket'
-            });
+            }, this);
             console.log('ERR', e);
         }
     }
@@ -35,7 +35,7 @@ export class Socket {
         this._subscribe.subscribe(slug, fn);
     }
 
-    publish(packet) {
-        this._subscribe.publish(packet);
+    publish(packet, connection) {
+        this._subscribe.publish(packet, connection);
     }
 }

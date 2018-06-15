@@ -3,7 +3,7 @@ import {SharedIniFileCredentials} from "aws-sdk";
 export class AmazonWebService {
 
 	private _aws = require('aws-sdk');
-	private _credentials:SharedIniFileCredentials = new this._aws.SharedIniFileCredentials({profile: 'keypiece'});
+	private _credentials:SharedIniFileCredentials = new this._aws.SharedIniFileCredentials({profile: 'default'});
 
 	constructor() {
 		// Set the region and credentials
