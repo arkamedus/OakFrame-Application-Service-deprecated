@@ -25,11 +25,19 @@ document.body.innerHTML = landing.getContents();
 
 let socket = <Socket>new Socket();
 
-socket.connect('ws://localhost:3001');
-
 socket.subscribe('msg', function (packet) {
     document.write(`
 	<h1>Recieved message from socket:</h1>
 	<pre>${JSON.stringify(packet)}</pre>
 	`);
 });
+
+socket.subscribe('err', function (packet) {
+    document.write(`
+	<h1>Recieved err from socket:</h1>
+	<pre>${JSON.stringify(packet)}</pre>
+	`);
+});
+
+
+socket.connect('ws://localhost:3001/');

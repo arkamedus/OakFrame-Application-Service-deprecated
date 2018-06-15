@@ -38,19 +38,25 @@ export class SocketProvider implements Provider {
     define(route, response): any {
         // this._endpoint.define(route, response);
     }
+    listen(route, callback):any {
+        this._endpoint.subscribe(route, callback)
+    }
 
     constructor(endpoint: Endpoint) {
+        let provider = this;
         this._endpoint = endpoint;
         this._websocketserver = require('websocket').server;
         this._http = require('http');
 
         this._server = this._http.createServer(function (request, response) {
+            //console.log('req',request);
             response.statusCode = 426;
             response.setHeader('Connection', "Upgrade");
             response.setHeader('Upgrade', "websocket");
             response.end(`This service requires use of the Websocket protocol.`);
         });
-        this._server.listen(3001, function () {
+        this._server.listen(3001, function (e) {
+            console.log('listening...',e);
         });
 
         let wsServer = new this._websocketserver({
@@ -59,18 +65,9 @@ export class SocketProvider implements Provider {
 
         wsServer.on('request', function (request) {
 
+           // console.log(request);
             let connection = request.accept(null, request.origin);
-            connection.send(JSON.stringify({err: false, msg: `Ahoy!`}));
-            connection.on('message', function (message) {
-                if (message.type === 'utf8') {
-                    // process WebSocket message
-                    this.send(JSON.stringify({err: false, msg: `Ahoy!`}));
-                }
-            });
-
-            connection.on('close', function (connection) {
-                // close user connection
-            });
+            provider._endpoint.handle(connection);
 
         });
     }

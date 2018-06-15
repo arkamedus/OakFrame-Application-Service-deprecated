@@ -1,8 +1,13 @@
+///<reference path="../subscribe/Subscribe.ts"/>
+import {Subscribe} from "../subscribe/Subscribe";
+
 export class Endpoint {
     private _url: string;
     private _routes: any[] = [];
+    private _subscribe:Subscribe;
 
     constructor() {
+        this._subscribe = new Subscribe();
         this._url = 'localhost';
     }
 
@@ -43,6 +48,29 @@ export class Endpoint {
             route = new RegExp("^" + route + "$")
         }
         this._routes.push({route: route, handler: handler});
+    }
+
+    subscribe(route:string, callback:any){
+        this._subscribe.subscribe(route, callback)
+    }
+
+    handle(connection){
+
+        let endpoint = this;
+
+        connection.send(JSON.stringify({msg: `Ahoy!`}));
+
+        connection.on('message', function (message) {
+            if (message.type === 'utf8') {
+                // process WebSocket message
+                //this.send(JSON.stringify({msg: message.utf8Data}));
+               endpoint._subscribe.publish(JSON.parse(message.utf8Data), connection);
+            }
+        });
+
+        connection.on('close', function (connection) {
+            // close user connection
+        });
     }
 
 }

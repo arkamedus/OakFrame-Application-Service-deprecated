@@ -5,9 +5,7 @@ import {Endpoint} from "../../lib/model/endpoint/Endpoint";
 
 let socket = new SocketProvider(new Endpoint());
 
-socket.define('/', function (request, response) {
-    response.end(`
-    <h1>HTTPServer</h1>
-    <p>Working as expected.</p>
-    `);
+socket.listen('handshake', function (request, response) {
+    console.log('got handshake')
+    response.send(JSON.stringify({handshake:Date.now()}));
 });

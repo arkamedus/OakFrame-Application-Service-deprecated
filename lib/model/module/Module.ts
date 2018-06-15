@@ -2,7 +2,7 @@
 
 import {Provider} from "../../interface/Provider";
 
-/** @class Module **/
+/** @struct Module **/
 export class Module {
 
 	/** Fast interface to determine if module has been initialized **/
