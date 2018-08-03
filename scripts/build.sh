@@ -28,7 +28,6 @@ cd ../../
 java -jar node_modules/google-closure-compiler/compiler.jar --warning_level=VERBOSE --compilation_level SIMPLE --language_in ECMASCRIPT6 --language_out ECMASCRIPT5 --js_output_file=release/client/app.js 'utils/**.js' 'tmp/shared/interface/**.js' 'tmp/shared/model/**.js' 'tmp/client/dist/bundle.js'
 cp client/index.html release/client/index.html
 
-
 #/lambda/
 mkdir release/lambda/
 cp -r tmp/lambda/ release/lambda/
