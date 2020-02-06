@@ -21,7 +21,7 @@ export class Kernel {
 
 	public route(url?) {
 
-		let request_url = window.location.pathname||window.location.href;
+		let request_url = url||window.location.pathname||window.location.href;
 
 		console.log(request_url);
 
