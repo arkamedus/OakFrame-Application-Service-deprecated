@@ -2,6 +2,8 @@ OakFrame Application Service
 ======
 Serverless, Microservices and Client Based Application Platform
 ------
+Ensure your paths are set correctly
+/etc/paths `~/.npm-global/bin` \
 These steps will install ts-node ,typescript, mocha and chai globally `-g`. \
 `npm install -g ts-node` \
 `npm install -g typescript` \

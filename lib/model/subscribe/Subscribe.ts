@@ -13,17 +13,17 @@ export class Subscribe {
     }
 
     subscribe(slug: string, callback: any): any {
-        this._subscribers[slug] = callback;
+        if (!this._subscribers[slug]){
+            this._subscribers[slug] = [];
+        }
+        this._subscribers[slug].push(callback);
     }
 
-    publish(packet, connection): any {
-        console.log('publish', packet);
-        for (let property in packet) {
-            if (packet.hasOwnProperty(property)) {
-                if (this._subscribers[property]) {
-                    this._subscribers[property](packet, connection);
-                }
-            }
+    publish(packet, data): any {
+        if (this._subscribers[packet]){
+            this._subscribers[packet].forEach(function(sub){
+                return sub(data);
+            });
         }
     }
 }
