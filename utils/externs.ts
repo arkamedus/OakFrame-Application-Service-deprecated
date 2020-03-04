@@ -1,1 +1,2 @@
-let require = require || {};
+// @ts-ignore
+const require = require || {};
