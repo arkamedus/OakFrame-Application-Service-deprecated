@@ -1,6 +1,6 @@
 {
-  "name": "kp-ts",
-  "version": "1.0.0",
+  "name": "oakframe",
+  "version": "1.0.1",
   "description": "`npm install -g ts-node` `npm install -g typescript`",
   "main": "index.js",
   "scripts": {
