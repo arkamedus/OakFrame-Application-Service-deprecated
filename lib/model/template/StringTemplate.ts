@@ -1,7 +1,8 @@
 //** @class Template is like an HTML container
 import {replaceAll} from "../Utils";
+import {TemplateInterface} from "./TemplateInterface";
 
-export class Template {
+export class StringTemplate implements TemplateInterface {
     private contents: string;
     constructor(input: string) {
         this.contents = input;
@@ -12,9 +13,9 @@ export class Template {
     apply(template_key_value:any) {
         let s = ''.concat(this.getContents());
         for (let data in template_key_value) {
-            console.log(`REPLACING ${data} with ${template_key_value[data]}`);
             s = replaceAll(s, '{' + (data) + '}', template_key_value[data]);
         }
         return s;
     }
+
 }

@@ -2,27 +2,30 @@ import {Subscriber} from "./Subscriber";
 
 export class Subscribe {
 
-    _subscribers: any[];
+    private _subscribers: any[];
 
     constructor() {
         this._subscribers = [];
     }
 
-    packet(identifier: string): any {
+    getSubscribers(identifier: string): any {
+        if (!this._subscribers[identifier]) {
+            this._subscribers[identifier] = [];
+        }
         return this._subscribers[identifier];
     }
 
-    subscribe(slug: string, callback: any): any {
-        if (!this._subscribers[slug]){
-            this._subscribers[slug] = [];
+    subscribe(identifier: string, callback: any): any {
+        if (!this._subscribers[identifier]) {
+            this._subscribers[identifier] = [];
         }
-        this._subscribers[slug].push(callback);
+        this._subscribers[identifier].push(callback);
     }
 
-    publish(packet, data): any {
-        if (this._subscribers[packet]){
-            this._subscribers[packet].forEach(function(sub){
-                return sub(data);
+    publish(identifier, data?): any {
+        if (this._subscribers[identifier]) {
+            this._subscribers[identifier].forEach(function (subscriber) {
+                subscriber(data);
             });
         }
     }

@@ -1,13 +1,9 @@
-///<reference path="../../../lib/interface/Provider.ts"/>
-
 import {Provider} from "../../interface/Provider";
 
-/** @struct Module **/
 export class Module {
 
 	/** Fast interface to determine if module has been initialized **/
 	private _initialized: boolean = false;
-	private _providers: Provider[] = [];
 
 	private _init(): any {
 	}
@@ -24,7 +20,7 @@ export class Module {
 
 	}
 
-	render(): void {
+	render() {
 
 	}
 

@@ -1,7 +1,8 @@
 import {existsSync, readFileSync} from "fs";
 import {replaceAll} from "./Utils";
+import {TemplateInterface} from "./template/TemplateInterface";
 
-export class Template {
+export class Template implements TemplateInterface{
 
     private contents: string;
     private file: string;
@@ -17,7 +18,7 @@ export class Template {
         return this.contents;
     }
 
-    apply(template_key_value:any) {
+    apply(template_key_value:any):string {
         this.loadFile(this.file);
         let s = ''.concat(this.contents);
         for (let data in template_key_value) {

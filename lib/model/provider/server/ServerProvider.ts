@@ -32,28 +32,12 @@ export class ServerProvider implements Provider, Rest {
         })
     }
 
-    get(instance: any): any {
-        return instance;
-    }
-
     route(request, response): any {
         this._endpoint.route(request, response);
     }
 
     define(route, response): any {
         this._endpoint.define(route, response);
-    }
-
-    then(): any {
-        return undefined;
-    }
-
-    error(): any {
-        return undefined;
-    }
-
-    end(): any {
-        return undefined;
     }
 
     close(callback): any {
