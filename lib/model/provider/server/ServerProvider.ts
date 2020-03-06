@@ -23,13 +23,13 @@ export class ServerProvider implements Provider, Rest {
 
         this.server = this.http.createServer(requestHandler);
 
-        this.server.listen(this.port, (err) => {
+        this.server.listen(this.port, (err:any) => {
             if (err) {
-                return console.log(err)
+                return console.log(err);
             }
 
-            console.log(`HTTPServer is listening on port ${this.port}`)
-        })
+            console.log(`HTTPServer is listening on port ${this.port}`);
+        });
     }
 
     route(request, response): any {

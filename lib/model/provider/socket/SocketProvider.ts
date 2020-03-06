@@ -55,6 +55,7 @@ export class SocketProvider implements Provider {
             response.setHeader('Upgrade', "websocket");
             response.end(`This service requires use of the Websocket protocol.`);
         });
+
         this._server.listen(3001, function (e) {
             console.log('listening...',e);
         });
@@ -65,7 +66,6 @@ export class SocketProvider implements Provider {
 
         wsServer.on('request', function (request) {
 
-           // console.log(request);
             let connection = request.accept(null, request.origin);
             provider._endpoint.handle(connection);
 

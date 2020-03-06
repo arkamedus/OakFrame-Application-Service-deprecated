@@ -46,7 +46,6 @@ export class Core implements StackInterface {
                         process();
                     }).catch(function (e) {
                         route.getResponse().end(`CHAIN FAILED`);
-                        console.log(e);
                         console.trace(e, "chain failure");
                         reject('Chain Failed');
                     });
@@ -86,7 +85,7 @@ export class Core implements StackInterface {
 
         server.listen(port, (err) => {
             if (err) {
-                return console.log(err)
+                return console.error(err)
             }
             console.log(`Core HTTP Server is listening on port ${port}`)
         });
