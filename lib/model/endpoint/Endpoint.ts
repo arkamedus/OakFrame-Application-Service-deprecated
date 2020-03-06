@@ -1,5 +1,7 @@
 ///<reference path="../subscribe/Subscribe.ts"/>
 import {Subscribe} from "../subscribe/Subscribe";
+import {IncomingMessageQueryParam} from "../Route";
+import {ServerResponse} from "http";
 
 export class Endpoint {
     private _url: string;
@@ -11,7 +13,7 @@ export class Endpoint {
         this._url = 'localhost';
     }
 
-    route(request, response) {
+    route(request:IncomingMessageQueryParam, response:ServerResponse) {
 
         for (let i = 0; i < this._routes.length; i++) {
             let route = this._routes[i];

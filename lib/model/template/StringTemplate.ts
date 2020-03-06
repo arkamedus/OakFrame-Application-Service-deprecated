@@ -3,7 +3,7 @@ import {replaceAll} from "../Utils";
 import {TemplateInterface} from "./TemplateInterface";
 
 export class StringTemplate implements TemplateInterface {
-    private contents: string;
+    private readonly contents: string;
     constructor(input: string) {
         this.contents = input;
     }

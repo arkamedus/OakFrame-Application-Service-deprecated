@@ -5,7 +5,7 @@ import {TemplateInterface} from "./template/TemplateInterface";
 export class Template implements TemplateInterface{
 
     private contents: string;
-    private file: string;
+    private readonly file: string;
     private file_accessed: Number;
 
     constructor(file: string) {

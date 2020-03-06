@@ -1,5 +1,6 @@
 OakFrame Application Service
 ======
+![coverage](https://img.shields.io/badge/Coverage-90%25-e0dc5e) \
 Serverless, Microservices and Client Based Application Platform
 ------
 Ensure your paths are set correctly
@@ -31,4 +32,5 @@ or something like this if that doesn't work\
 
 There are some demos available, including
 ------
-Web Server (parameterized routing, )
+Web Server `./demo/http/HTTPServer.ts` \
+Socket Server `./demo/http/SocketServer.ts`

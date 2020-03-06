@@ -5,12 +5,11 @@ import {MiddlewareInterface} from "../../interface/Middleware";
 import {Core} from "../Core";
 import {RouteInterface} from "../../interface/RouteInterface";
 
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 export class URLEncoded implements MiddlewareInterface {
 
     setup(app: Core) {
-
 
         app.use('/(.+)?', function (route: RouteInterface) {
             return new Promise(function (resolve, reject) {

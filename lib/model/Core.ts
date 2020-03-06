@@ -1,14 +1,19 @@
 import {Layer} from "./Layer";
-import {Route} from "./Route";
+import {IncomingMessageQueryParam, Route} from "./Route";
 import {MiddlewareInterface} from "../interface/Middleware";
 import {StackInterface} from "../interface/StackInterface";
+import {Server, ServerResponse} from "http";
 
 export class Core implements StackInterface {
 
     stack: Array<Layer>;
+    private hostname: string;
+    private port: number;
 
     constructor() {
         this.stack = [];
+        this.hostname = "localhost";
+        this.port = 8080;
     }
 
     public register(middleware: MiddlewareInterface) {
@@ -21,14 +26,14 @@ export class Core implements StackInterface {
 
     public route(route: Route) {
 
-        var url = require('url');
-        var url_parts = url.parse(route.getRequest().url, true);
+        let url = require('url');
+        let url_parts = url.parse(route.getRequest().url, true);
 
         route.getRequest().query = url_parts.query;
         route.getRequest().url = route.getRequest().url.split("?")[0];
 
         let chain: Array<Layer> = [];
-        this.stack.forEach(function (layer) {
+        this.stack.forEach(function (layer: Layer) {
             let match = route.getRequest().url.match(layer.route);
             if (match) {
                 route.getRequest().params = match.slice(1).map(function (slug) {
@@ -43,6 +48,9 @@ export class Core implements StackInterface {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
                     layer.fn(route).then(function () {
+                        if (route.dropout){
+                            return resolve();
+                        }
                         process();
                     }).catch(function (e) {
                         route.getResponse().end(`CHAIN FAILED`);
@@ -53,13 +61,12 @@ export class Core implements StackInterface {
                     resolve();
                 }
             }
-
             process();
         });
 
     }
 
-    public http_listener(request, response) {
+    public http_listener(request: IncomingMessageQueryParam, response: ServerResponse) {
         let self = this;
 
         let route = new Route();
@@ -67,7 +74,7 @@ export class Core implements StackInterface {
         route.setResponse(response);
 
         self.route(route).then(function () {
-            route.getPayload().then(function (payload) {
+            route.getPayload().then(function (payload: string) {
                 response.end(payload);
             }).catch(function (e) {
                 console.trace(e);
@@ -76,19 +83,27 @@ export class Core implements StackInterface {
     }
 
     public listen(port: number): void {
-
-        let http = require('http');
         let self = this;
-        let server = http.createServer(function (request, response) {
+        this.port = port;
+        let http = require('http');
+        let server: Server = http.createServer(function (request: IncomingMessageQueryParam, response: ServerResponse) {
             self.http_listener(request, response);
         });
 
-        server.listen(port, (err) => {
-            if (err) {
-                return console.error(err)
-            }
-            console.log(`Core HTTP Server is listening on port ${port}`)
+        server.listen(port, () => {
+            require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+                self.hostname = add;
+                console.log(`Core HTTP Server is listening on ${self.hostname}:${port}`)
+            });
         });
+    }
+
+    getHostname() {
+        return this.hostname;
+    }
+
+    getPort() {
+        return this.port;
     }
 
 }

@@ -3,12 +3,14 @@
 
 import {Endpoint} from "../../endpoint/Endpoint";
 import {Provider} from "../../../interface/Provider";
+import {IncomingMessageQueryParam, Route} from "../../Route";
+import {ServerResponse} from "http";
 export class ServerProvider implements Provider, Rest {
 
     private _url: string;
     private http;
-    private port: number;
-    private server;
+    private readonly port: number;
+    private readonly server;
     private _endpoint: Endpoint;
 
     constructor(endpoint: Endpoint) {
@@ -17,7 +19,7 @@ export class ServerProvider implements Provider, Rest {
         this.port = 3000;
         this._endpoint = endpoint;
 
-        const requestHandler = (request, response) => {
+        const requestHandler = (request:IncomingMessageQueryParam, response:ServerResponse) => {
             this.route(request, response);
         };
 
@@ -32,11 +34,11 @@ export class ServerProvider implements Provider, Rest {
         });
     }
 
-    route(request, response): any {
+    route(request:IncomingMessageQueryParam, response:ServerResponse): any {
         this._endpoint.route(request, response);
     }
 
-    define(route, response): any {
+    define(route:Route, response:ServerResponse): any {
         this._endpoint.define(route, response);
     }
 

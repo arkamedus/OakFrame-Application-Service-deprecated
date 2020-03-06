@@ -7,9 +7,9 @@ export class SocketProvider implements Provider {
 
     private _url: string;
     private _endpoint: Endpoint;
-    private _websocketserver;
+    private readonly _websocketserver;
     private _http;
-    private _server;
+    private readonly _server;
 
     close(callback: any): any {
         if (this._server) {
@@ -35,10 +35,10 @@ export class SocketProvider implements Provider {
         return undefined;
     }
 
-    define(route, response): any {
+    define(route, response): void {
         // this._endpoint.define(route, response);
     }
-    listen(route, callback):any {
+    listen(route, callback):void {
         this._endpoint.subscribe(route, callback)
     }
 

@@ -33,7 +33,7 @@ export class Kernel extends Subscribe {
 		let request_url = url||window.location.pathname||window.location.href;
 
 		let chain: Array<Layer> = [];
-		this.stack.forEach(function (layer) {
+		this.stack.forEach(function (layer: Layer) {
 			let match = request_url.match(layer.route);
 			if (match) {
 				chain.push(layer);
@@ -56,6 +56,7 @@ export class Kernel extends Subscribe {
 					resolve();
 				}
 			}
+
 			function process_error() {
 				if (chain.length > 0) {
 					let layer: Layer = chain.shift();
