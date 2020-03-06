@@ -10,7 +10,6 @@ describe('Endpoint', () => {
     let endpoint = new Endpoint();
 
     it('should be created', () => {
-
         expect(endpoint).not.equal(undefined);
     });
 

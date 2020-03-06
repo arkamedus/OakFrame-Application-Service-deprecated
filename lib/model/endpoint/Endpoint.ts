@@ -62,8 +62,6 @@ export class Endpoint {
 
         connection.on('message', function (message) {
             if (message.type === 'utf8') {
-                // process WebSocket message
-                //this.send(JSON.stringify({msg: message.utf8Data}));
                endpoint._subscribe.publish(JSON.parse(message.utf8Data), connection);
             }
         });
