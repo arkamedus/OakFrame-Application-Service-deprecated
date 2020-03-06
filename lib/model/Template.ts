@@ -1,7 +1,6 @@
 import {existsSync, readFileSync} from "fs";
 import {replaceAll} from "./Utils";
 
-
 export class Template {
 
     private contents: string;
