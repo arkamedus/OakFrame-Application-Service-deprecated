@@ -1,0 +1,620 @@
+@charset "UTF-8";
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+.navbar {
+  position: sticky;
+  padding: 10px 0;
+  top: 0;
+  background: #fff;
+  z-index: 9;
+}
+
+.navbar-inner > *, .subnavbar > *, .main-footer > .pill {
+  border-radius: 4px;
+  background: #efefef;
+  display: inline-block;
+  padding: 4px 10px;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.navbar-inner * {
+  font-size: 13pt;
+}
+
+.navbar-inner > *:hover {
+  background: #ddd;
+}
+
+.navbar-inner > .right, .main-footer > .right {
+  margin-right: 0;
+  margin-left: 10px;
+  float: right;
+}
+
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown > span {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 0;
+}
+
+.dropdown-inner {
+  background-color: #efefef;
+  min-width: 160px;
+  padding: 4px 10px;
+  margin-top: 40px;
+  border-radius: 4px;
+  text-align: right;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#pill-search {
+  width: 0;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+  transition: width 0.125s ease-in-out;
+}
+
+#pill-search.pill-search-open {
+  width: 120px;
+  margin-right: 10px;
+}
+
+#pill-search-icon {
+  cursor: pointer;
+}
+
+.navbar-inner > #pill-search-expand {
+  padding: 3px 10px;
+}
+
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.icon-huge {
+  text-align: center;
+  font-size: 200pt;
+  color: rgba(5, 5, 5, 0.3);
+}
+
+@media screen and (max-width: 42em) {
+  .icon-huge {
+    font-size: 120pt;
+  }
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.02em;
+  font-family: "DM Sans", sans-serif;
+}
+
+body, p, textarea, input {
+  font-size: 12pt;
+}
+
+p, textarea, input {
+  margin-bottom: 9pt;
+  line-height: 18pt;
+}
+
+body, html {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.hero {
+  background-color: #eff;
+  position: absolute;
+  top: 0;
+}
+
+.hero {
+  width: 100vw;
+  height: -webkit-fill-available;
+}
+
+h1, h2, h3, h4 {
+  padding-bottom: 18pt;
+  font-weight: 500;
+  margin: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 920pt;
+  padding: 0 10px;
+}
+
+.container.med {
+  width: 66%;
+  max-width: 640pt;
+}
+
+@media screen and (max-width: 42em) {
+  .container.med {
+    width: 100%;
+  }
+}
+input[type=text], textarea, input[type=submit] {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background: #efefef;
+  display: inline-block;
+  padding: 4px 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  body, html {
+    background: #333;
+    color: #ddd;
+  }
+
+  .navbar {
+    background: #333;
+  }
+
+  .hero {
+    background-color: #243f59;
+  }
+
+  .navbar-inner > *, .subnavbar > *, .main-footer > .pill {
+    background-color: #444;
+  }
+
+  .navbar-inner > *:hover, .dropdown-inner {
+    background: #555;
+  }
+
+  a {
+    color: lightskyblue;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -14,17 +14,16 @@ export class Analytics implements MiddlewareInterface {
             return new Promise(function (resolve, reject) {
                 let event = new AnalyticsEvent();
                 event.url = route.getRequest().url;
-                event.method = route.getRequest().method||"unknown";
+                event.method = route.getRequest().method || "unknown";
                 event.pragma = route.getRequest().headers.pragma || "no-cache";
                 event.cache_control = route.getRequest().headers["cache-control"] || "no-cache";
-                event.do_not_track = !!parseInt((route.getRequest().headers["dnt"]||"0").toString());
-                event.upgrade_insecure_requests = !!parseInt((route.getRequest().headers["upgrade-insecure-requests"]||"0").toString());
+                event.do_not_track = !!parseInt((route.getRequest().headers["dnt"] || "0").toString());
+                event.upgrade_insecure_requests = !!parseInt((route.getRequest().headers["upgrade-insecure-requests"] || "0").toString());
                 event.user_agent = route.getRequest().headers["user-agent"] || "";
                 event.accept = route.getRequest().headers["accept"] || "";
                 event.accept_encoding = route.getRequest().headers["accept-encoding"] || "";
                 event.accept_language = route.getRequest().headers["accept-language"] || "";
-                event.remote_address = route.getRequest().connection.remoteAddress||"unknown";
-                console.log('user', event.serialize());
+                event.remote_address = route.getRequest().connection.remoteAddress || "unknown";
                 resolve();
             });
         });

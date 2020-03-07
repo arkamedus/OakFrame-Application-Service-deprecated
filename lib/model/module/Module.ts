@@ -36,4 +36,8 @@ export class Module {
 		this._init = fn;
 	}
 
+	use(){
+
+	}
+
 }

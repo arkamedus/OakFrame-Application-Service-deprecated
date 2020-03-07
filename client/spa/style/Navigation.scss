@@ -1,0 +1,32 @@
+@import "Globals";
+
+.navbar {
+  position: sticky;
+  padding: $base-padding 0;
+  top: 0;
+  background: #fff;
+  z-index: 9;
+}
+
+.navbar-inner > *,.subnavbar > *, .main-footer > .pill {
+  border-radius: $radius-size;
+  background: $pill-color;
+  display: inline-block;
+  padding: 4px $base-padding;
+  margin-right: $base-padding;
+  text-decoration: none;
+}
+
+.navbar-inner * {
+  font-size: 13pt;
+}
+
+.navbar-inner > *:hover {
+  background: #ddd;
+}
+
+.navbar-inner > .right, .main-footer > .right {
+  margin-right: 0;
+  margin-left: $base-padding;
+  float: right;
+}

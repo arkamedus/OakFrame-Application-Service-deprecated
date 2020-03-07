@@ -20,6 +20,12 @@ switch (cmd) {
         console.log(help(args));
         break;
 
+    case 'ip':
+        require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+            console.log('addr: ' + add);
+        });
+        break;
+
     default:
         console.error(`OakFrame: "${cmd}" is not a valid option.`);
         console.log(help(args));

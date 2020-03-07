@@ -1,0 +1,26 @@
+@import "Globals";
+
+// TEMPORARY FOR TESTING
+@media (prefers-color-scheme: dark) {
+  $foreground-color:#333;
+  body, html {
+    background: $foreground-color;
+    color: #ddd;
+  }
+  .navbar {
+    background: $foreground-color;
+  }
+
+  .hero {
+    background-color: #243f59;
+  }
+  .navbar-inner > *,.subnavbar > *, .main-footer > .pill {
+    background-color:#444;
+  }
+  .navbar-inner > *:hover, .dropdown-inner {
+    background: #555;
+  }
+  a {
+    color: lightskyblue;
+  }
+}

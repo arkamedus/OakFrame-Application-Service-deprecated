@@ -29,8 +29,6 @@
     "request": "^2.88.2",
     "ts-node": "^8.6.2",
     "typings": "^2.1.1",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11",
     "websocket": "^1.0.31"
   }
 }

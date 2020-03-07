@@ -1,0 +1,79 @@
+@import "Globals";
+@import "Navigation";
+@import "Dropdown";
+@import "Text";
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0.02em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+body, p, textarea, input {
+  font-size: $base_font_size;
+}
+
+p, textarea, input {
+  margin-bottom: $leading/2;
+  line-height: $leading;
+}
+
+body, html {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: $foreground-color;
+}
+
+.hero {
+  background-color:#eff;
+  position: absolute;
+  top: 0;
+}
+
+.hero {
+  width: 100vw;
+  //height: 100vh;
+  height: -webkit-fill-available;
+}
+
+h1, h2, h3, h4 {
+  padding-bottom: $leading;
+  font-weight: 500;
+  margin: 0;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 920pt;
+  padding: 0 $base-padding;
+}
+
+.container.med {
+  width: 66%;
+  max-width: 640pt;
+}
+@media screen and (max-width: $mobile) {
+  .container.med{
+    width: 100%;
+  }
+}
+
+input[type=text], textarea, input[type=submit]{
+  width: 100%;
+  border:none;
+  outline:none;
+  border-radius: $radius-size;
+  background: $pill-color;
+  display: inline-block;
+  padding: 4px $base-padding;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+
+@import "Dark";

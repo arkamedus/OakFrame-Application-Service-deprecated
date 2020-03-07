@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "target": "es6",
+    "sourceMap": true
+  },
+  "files": [
+    "app.ts"
+  ],
+  "include": [
+    "html.d.ts"
+  ]
+}
