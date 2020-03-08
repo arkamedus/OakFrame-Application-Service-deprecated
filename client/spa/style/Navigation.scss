@@ -8,7 +8,7 @@
   z-index: 9;
 }
 
-.navbar-inner > *,.subnavbar > *, .main-footer > .pill {
+.navbar-inner > *, .subnavbar > *, .main-footer > .pill {
   border-radius: $radius-size;
   background: $pill-color;
   display: inline-block;

@@ -434,6 +434,107 @@
     font-size: 120pt;
   }
 }
+@media screen and (max-width: 42em) {
+  .hide-mobile {
+    display: none;
+  }
+}
+/* ------
+//flex-flow: <‘flex-direction’> || <‘flex-wrap’>;
+//flex-direction: row | row-reverse | column | column-reverse;
+//flex-wrap: nowrap | wrap | wrap-reverse;
+//justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+//align-items: stretch | flex-start | flex-end | center | baseline;
+//justify-content: $justify-content;
+     //align-items: $align-items;
+ ------ */
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: normal;
+}
+
+[class*=-nowrap] {
+  flex-wrap: nowrap;
+}
+
+[class*=-reverse] {
+  flex-direction: row-reverse;
+}
+
+[class*=align-start] {
+  align-items: flex-start;
+}
+
+[class*=align-center] {
+  align-items: center;
+}
+
+[class*=align-end] {
+  align-items: flex-end;
+}
+
+[class*=align-stretch] {
+  align-items: stretch;
+}
+
+[class*=justify-start] {
+  justify-content: flex-end;
+}
+
+[class*=justify-center] {
+  justify-content: center;
+}
+
+[class*=justify-end] {
+  justify-content: flex-end;
+}
+
+[class*=space-between] {
+  justify-content: space-between;
+}
+
+[class*=space-around] {
+  justify-content: space-around;
+}
+
+[class*=grow] {
+  flex: 1;
+}
+
+[class*=first] {
+  order: -1;
+}
+
+[class*=last] {
+  order: 1;
+}
+
+input[type=text], textarea, input[type=submit], button {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background: #efefef;
+  display: inline-block;
+  padding: 4px 10px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type=submit]:hover, button:hover {
+  background: #ddd;
+  cursor: pointer;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -468,6 +569,7 @@ body, html {
 
 .hero {
   width: 100vw;
+  height: 100vh;
   height: -webkit-fill-available;
 }
 
@@ -494,18 +596,6 @@ h1, h2, h3, h4 {
     width: 100%;
   }
 }
-input[type=text], textarea, input[type=submit] {
-  width: 100%;
-  border: none;
-  outline: none;
-  border-radius: 4px;
-  background: #efefef;
-  display: inline-block;
-  padding: 4px 10px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
 @media screen and (max-width: 42em) {
   .hide-mobile {
     display: none;

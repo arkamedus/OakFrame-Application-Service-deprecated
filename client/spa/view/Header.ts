@@ -7,7 +7,7 @@ export class Header extends StringTemplate {
 <div class="navbar" id="navbar">
     <div class="navbar-inner container">
     <a class="site-title no-decoration" style="font-weight:bolder;" href="//{hostname}:8084/">
-        <div class="left"><i class="fas fa-bezier-curve"></i><span class="hide-mobile"> OakFrame SPA</span></div>
+        <div class="left"><i class="fas fa-bezier-curve"></i><span class="hide-mobile"> OakFrame</span></div>
     </a>
     <div class="dropdown right"><span><i class="fas fa-bars"></i></span>
         <div class="dropdown-content">

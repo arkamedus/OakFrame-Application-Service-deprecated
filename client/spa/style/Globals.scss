@@ -3,9 +3,9 @@ $base_line_height: 18pt;
 $leading: $base-line-height;
 $border_color: #999;
 $background-color: #e1ecf5;
-$foreground-color:#fff;
+$foreground-color: #fff;
 $muted: #98a3ad;
-$site_color:#999;
+$site_color: #999;
 $heavy: #668;
 $base-padding: 10px;
 $pill-color: #efefef;
@@ -54,31 +54,69 @@ $header-padding: $leading*.5 $leading*2;
 .flex {
   display: flex;
   align-items: center;
+
   &-row {
     @include flex(row wrap);
   }
+
   &-col {
     @include flex(column);
   }
 }
 
-[class*="-nowrap"] {flex-wrap: nowrap}
-[class*="-reverse"] {flex-direction: row-reverse}
+[class*="-nowrap"] {
+  flex-wrap: nowrap
+}
 
-[class*="align-start"] {align-items: flex-start}
-[class*="align-center"] {align-items: center}
-[class*="align-end"] {align-items: flex-end}
-[class*="align-stretch"] {align-items: stretch}
+[class*="-reverse"] {
+  flex-direction: row-reverse
+}
+
+[class*="align-start"] {
+  align-items: flex-start
+}
+
+[class*="align-center"] {
+  align-items: center
+}
+
+[class*="align-end"] {
+  align-items: flex-end
+}
+
+[class*="align-stretch"] {
+  align-items: stretch
+}
 
 
-[class*="justify-start"] {justify-content: flex-end}
-[class*="justify-center"] {justify-content: center}
+[class*="justify-start"] {
+  justify-content: flex-end
+}
 
-[class*="justify-end"] {justify-content: flex-end}
+[class*="justify-center"] {
+  justify-content: center
+}
 
-[class*="space-between"] {justify-content: space-between;}
-[class*="space-around"] {justify-content: space-around}
+[class*="justify-end"] {
+  justify-content: flex-end
+}
 
-[class*="grow"] {flex: 1}
-[class*="first"] {order: -1}
-[class*="last"] {order: 1}
+[class*="space-between"] {
+  justify-content: space-between;
+}
+
+[class*="space-around"] {
+  justify-content: space-around
+}
+
+[class*="grow"] {
+  flex: 1
+}
+
+[class*="first"] {
+  order: -1
+}
+
+[class*="last"] {
+  order: 1
+}

@@ -2,6 +2,7 @@
 @import "Navigation";
 @import "Dropdown";
 @import "Text";
+@import "Button";
 
 * {
   -webkit-box-sizing: border-box;
@@ -30,14 +31,14 @@ body, html {
 }
 
 .hero {
-  background-color:#eff;
+  background-color: #eff;
   position: absolute;
   top: 0;
 }
 
 .hero {
   width: 100vw;
-  //height: 100vh;
+  height: 100vh;
   height: -webkit-fill-available;
 }
 
@@ -46,6 +47,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   margin: 0;
 }
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -57,23 +59,11 @@ h1, h2, h3, h4 {
   width: 66%;
   max-width: 640pt;
 }
+
 @media screen and (max-width: $mobile) {
-  .container.med{
+  .container.med {
     width: 100%;
   }
 }
-
-input[type=text], textarea, input[type=submit]{
-  width: 100%;
-  border:none;
-  outline:none;
-  border-radius: $radius-size;
-  background: $pill-color;
-  display: inline-block;
-  padding: 4px $base-padding;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-}
-
 
 @import "Dark";
