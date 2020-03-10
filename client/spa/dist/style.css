@@ -518,7 +518,7 @@
   order: 1;
 }
 
-input[type=text], textarea, input[type=submit], button {
+input[type=text], input[type=email], input[type=password], textarea, input[type=submit], button {
   width: 100%;
   border: none;
   outline: none;
@@ -528,6 +528,10 @@ input[type=text], textarea, input[type=submit], button {
   padding: 4px 10px;
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+button {
+  width: auto;
 }
 
 input[type=submit]:hover, button:hover {
@@ -545,11 +549,15 @@ input[type=submit]:hover, button:hover {
   font-family: "DM Sans", sans-serif;
 }
 
-body, p, textarea, input {
+ul {
+  margin-left: 18pt;
+}
+
+body, p, textarea, input, button {
   font-size: 12pt;
 }
 
-p, textarea, input {
+p, textarea, input, button, ul {
   margin-bottom: 9pt;
   line-height: 18pt;
 }
@@ -574,9 +582,9 @@ body, html {
 }
 
 h1, h2, h3, h4 {
-  padding-bottom: 18pt;
+  padding-top: 18pt;
+  padding-bottom: 9pt;
   font-weight: 500;
-  margin: 0;
 }
 
 .container {

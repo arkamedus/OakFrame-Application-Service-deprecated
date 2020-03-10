@@ -14,11 +14,15 @@
   font-family: 'DM Sans', sans-serif;
 }
 
-body, p, textarea, input {
+ul {
+  margin-left: $leading;
+}
+
+body, p, textarea, input, button {
   font-size: $base_font_size;
 }
 
-p, textarea, input {
+p, textarea, input, button, ul {
   margin-bottom: $leading/2;
   line-height: $leading;
 }
@@ -43,9 +47,9 @@ body, html {
 }
 
 h1, h2, h3, h4 {
-  padding-bottom: $leading;
+  padding-top: $leading;
+  padding-bottom: $leading/2;
   font-weight: 500;
-  margin: 0;
 }
 
 .container {

@@ -27,7 +27,7 @@ export class Header extends StringTemplate {
                                                                           value="{search_safe}"><i
                 id="pill-search-icon" class="fas fa-search"></i></div>
 
-    <a href="/profile" class="right" style="z-index:-3;"><i class="far fa-user-circle"></i><span class="hide-mobile"> Sign Up</span></a><a href="/free-to-play-games" class="right" style="z-index:-3;"><i class="fas fa-ghost"></i><span class="hide-mobile"> Games</span></a>
+    <a href="/{profile_link}" class="right" style="z-index:-3;"><i class="far fa-user-circle"></i><span class="hide-mobile"> Log In</span></a><a href="/free-to-play-games" class="right" style="z-index:-3;"><i class="fas fa-ghost"></i><span class="hide-mobile"> Games</span></a>
     </div>
 </div>
 `);

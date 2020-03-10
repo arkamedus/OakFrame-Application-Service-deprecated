@@ -1,6 +1,6 @@
 @import "Globals";
 
-input[type=text], textarea, input[type=submit], button {
+input[type=text],input[type=email],input[type=password], textarea, input[type=submit], button {
   width: 100%;
   border: none;
   outline: none;
@@ -10,6 +10,10 @@ input[type=text], textarea, input[type=submit], button {
   padding: 4px $base-padding;
   -moz-appearance: none;
   -webkit-appearance: none;
+}
+
+button {
+  width: auto;
 }
 
 input[type=submit]:hover, button:hover {

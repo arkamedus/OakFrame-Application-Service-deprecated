@@ -1,23 +1,43 @@
 import {Kernel} from "../../lib/model/Kernel";
 import {StringTemplate} from "../../lib/model/template/StringTemplate";
 import {Header} from "./view/Header";
-import Landing from './view/Landing.html';
-import About from './view/About.html';
-import Error from './view/Error.html';
-import Contact from './view/Contact.html';
-import Search from './view/Search.html';
+import LandingView from './view/Landing.html';
+import AboutView from './view/About.html';
+import ErrorView from './view/Error.html';
+import ContactView from './view/Contact.html';
+import SearchView from './view/Search.html';
+import {Account} from "./model/Account";
+import {SignUp} from "./controller/SignUp";
+import {LogIn} from "./controller/Login";
+import {Reset} from "./controller/Reset";
+import {Privacy} from "./controller/Privacy";
 
 let kernel = <Kernel>new Kernel();
 
-function generateStateTemplate() {
+let account = new Account();
+
+let controller_signup = new SignUp();
+let controller_login = new LogIn();
+let controller_reset = new Reset();
+let controller_privacy = new Privacy();
+
+export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
-    return {hostname: window.location.hostname, search: decodeURIComponent(query), search_safe: decodeURIComponent(query).replace(/"/g, '&quot;')}
+
+    let dat:any = {hostname: window.location.hostname, search: decodeURIComponent(query), search_safe: decodeURIComponent(query).replace(/"/g, '&quot;')};
+
+    if (!account.isAuthenticated()){
+        dat.profile_link = "login";
+    }else{
+        dat.profile_link = "profile";
+    }
+    return dat;
 }
 
 kernel.use('/', function () {
     return new Promise(function (resolve, reject) {
         document.body.innerHTML =
-            (new StringTemplate(Landing)).apply(generateStateTemplate());
+            (new StringTemplate(LandingView)).apply(generateStateTemplate());
         resolve();
     });
 });
@@ -26,15 +46,20 @@ kernel.use('/about', function () {
     //TODO use About.ts controller
     return new Promise(function (resolve, reject) {
         document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
-            (new StringTemplate(About)).getContents();
+            (new StringTemplate(AboutView)).getContents();
         resolve();
     });
 });
 
+kernel.use('/signup', controller_signup.use);
+kernel.use('/login', controller_login.use);
+kernel.use('/reset', controller_reset.use);
+kernel.use('/privacy', controller_privacy.use);
+
 kernel.use('/contact', function () {
     return new Promise(function (resolve, reject) {
         document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
-            (new StringTemplate(Contact)).getContents();
+            (new StringTemplate(ContactView)).getContents();
         resolve();
     });
 });
@@ -43,7 +68,7 @@ kernel.use('/search/?(.+)?', function () {
     console.log('SEARCH PAGE');
     return new Promise(function (resolve, reject) {
         document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
-            (new StringTemplate(Search)).apply(generateStateTemplate());
+            (new StringTemplate(SearchView)).apply(generateStateTemplate());
         resolve();
     });
 });
@@ -52,7 +77,7 @@ kernel.error('/([a-zA-Z0-9-]+)?', function () {
     return new Promise(function (resolve, reject) {
         document.body.innerHTML =
             document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
-                (new StringTemplate(Error)).apply(generateStateTemplate());
+                (new StringTemplate(ErrorView)).apply(generateStateTemplate());
         resolve();
     });
 });
