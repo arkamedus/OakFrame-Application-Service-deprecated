@@ -1,11 +1,11 @@
-import {Core} from "../../lib/model/Core";
+import {ApplicationServer} from "../../lib/model/ApplicationServer";
 import {existsSync, readFileSync} from "fs";
 import {CookieSession} from "../../lib/model/middleware/CookieSession";
 import {Template} from "../../lib/model/Template";
 import {Analytics} from "../../lib/model/middleware/Analytics";
 import {Route} from "../../lib/model/Route";
 
-let app = new Core();
+let app = new ApplicationServer();
 
 app.register(new CookieSession());
 app.register(new Analytics());
@@ -49,6 +49,7 @@ app.use('/([a-zA-Z0-9-/_)]+).(html|css|png|jpg|js|json|svg|mp3|wav|oft|ttf|gif|i
             console.error(filename);
             reject("File does not exist");
         }
+
     });
 
 });
@@ -67,6 +68,7 @@ app.use('/([^.]+)?/?', function (route: Route) {
             console.error(`Unable to find ${filename}`);
         }
         resolve();
+
     });
 
 });

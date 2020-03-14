@@ -4,7 +4,7 @@ import {MiddlewareInterface} from "../interface/Middleware";
 import {StackInterface} from "../interface/StackInterface";
 import {Server, ServerResponse} from "http";
 
-export class Core implements StackInterface {
+export class ApplicationServer implements StackInterface {
 
     stack: Array<Layer>;
     private hostname: string;

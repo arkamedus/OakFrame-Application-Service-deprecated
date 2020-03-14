@@ -2,12 +2,12 @@
  * Middleware wrapper for cookie-session
  */
 import {MiddlewareInterface} from "../../interface/Middleware";
-import {Core} from "../Core";
+import {ApplicationServer} from "../ApplicationServer";
 import {RouteInterface} from "../../interface/RouteInterface";
 
 export class CookieSession implements MiddlewareInterface {
 
-    setup(app: Core) {
+    setup(app: ApplicationServer) {
         let self = this;
         let cookieSession = require('cookie-session');
 

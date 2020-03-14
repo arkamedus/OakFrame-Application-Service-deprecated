@@ -49,7 +49,6 @@ export class SocketProvider implements Provider {
         this._http = require('http');
 
         this._server = this._http.createServer(function (request, response) {
-            //console.log('req',request);
             response.statusCode = 426;
             response.setHeader('Connection', "Upgrade");
             response.setHeader('Upgrade', "websocket");
@@ -65,11 +64,13 @@ export class SocketProvider implements Provider {
         });
 
         wsServer.on('request', function (request) {
-
             let connection = request.accept(null, request.origin);
             provider._endpoint.handle(connection);
-
         });
+    }
+
+    getEndpoint(){
+        return this._endpoint;
     }
 
 }

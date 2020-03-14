@@ -1,14 +1,14 @@
 /*
  * Middleware wrapper for analytics
  */
-import {Core} from "../Core";
+import {ApplicationServer} from "../ApplicationServer";
 import {Route} from "../Route";
 import {MiddlewareInterface} from "../../interface/Middleware";
 import {AnalyticsEvent} from "../AnalyticsEvent";
 
 export class Analytics implements MiddlewareInterface {
 
-    setup(app: Core) {
+    setup(app: ApplicationServer) {
 
         app.use('/(.+)?', function (route: Route) {
             return new Promise(function (resolve, reject) {

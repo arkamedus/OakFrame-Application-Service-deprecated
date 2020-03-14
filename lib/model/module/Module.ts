@@ -36,7 +36,7 @@ export class Module {
 		this._init = fn;
 	}
 
-	use(){
+	use(param?:any):any{
 
 	}
 

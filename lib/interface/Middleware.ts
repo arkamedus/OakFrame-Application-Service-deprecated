@@ -1,5 +1,5 @@
-import {Core} from "../model/Core";
+import {ApplicationServer} from "../model/ApplicationServer";
 
 export interface MiddlewareInterface {
-    setup(app:Core);
+    setup(app:ApplicationServer);
 }

@@ -18,16 +18,21 @@ export class Socket {
             console.log('connected:', e);
             this.send(JSON.stringify({
                 handshake:true
-            }))
+            }));
         };
         this._socket.onmessage = function (e) {
+            let json = JSON.parse(e.data);
+            for (var key in json) {
+                if (json.hasOwnProperty(key)) {
+                    let data = json[key];
+                    _socket._subscribe.publish(key, data);
+                }
+            }
             _socket.publish(JSON.parse(e.data), this);
         };
         this._socket.onerror = function (e) {
-            _socket.publish({
-                "err": 'Error connecting to websocket'
-            }, this);
             console.log('ERR', e);
+            _socket.publish(JSON.parse('error'), e);
         }
     }
 
