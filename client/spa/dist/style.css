@@ -434,6 +434,13 @@
     font-size: 120pt;
   }
 }
+label {
+  text-transform: uppercase;
+  font-size: 10pt;
+  opacity: 0.35;
+  font-weight: bolder;
+}
+
 @media screen and (max-width: 42em) {
   .hide-mobile {
     display: none;
@@ -587,7 +594,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
 }
 
-.container {
+.container, .nav-container {
   width: 100%;
   margin: 0 auto;
   max-width: 920pt;
@@ -597,6 +604,10 @@ h1, h2, h3, h4 {
 .container.med {
   width: 66%;
   max-width: 640pt;
+}
+
+body .container:last-of-type {
+  padding-bottom: 50px;
 }
 
 @media screen and (max-width: 42em) {

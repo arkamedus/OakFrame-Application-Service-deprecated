@@ -73,4 +73,4 @@ app.use('/([^.]+)?/?', function (route: Route) {
 
 });
 
-app.listen(8084);
+app.listen(8080);

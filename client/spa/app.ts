@@ -1,25 +1,28 @@
-import {Kernel} from "../../lib/model/Kernel";
+import {ApplicationRouter} from "../../lib/model/ApplicationRouter";
 import {StringTemplate} from "../../lib/model/template/StringTemplate";
-import {Header} from "./view/Header";
+import HeaderView from "./view/Header.html";
 import LandingView from './view/Landing.html';
-import AboutView from './view/About.html';
 import ErrorView from './view/Error.html';
 import ContactView from './view/Contact.html';
 import SearchView from './view/Search.html';
 import {Account} from "./model/Account";
-import {SignUp} from "./controller/SignUp";
-import {LogIn} from "./controller/Login";
-import {Reset} from "./controller/Reset";
-import {Privacy} from "./controller/Privacy";
+import {SignUpController} from "./controller/SignUpController";
+import {LogInController} from "./controller/LoginController";
+import {ResetController} from "./controller/ResetController";
+import {PrivacyController} from "./controller/PrivacyController";
+import {AboutController} from "./controller/AboutController";
+import {LandingController} from "./controller/LandingController";
 
-let kernel = <Kernel>new Kernel();
+let app = <ApplicationRouter>new ApplicationRouter();
 
 let account = new Account();
 
-let controller_signup = new SignUp();
-let controller_login = new LogIn();
-let controller_reset = new Reset();
-let controller_privacy = new Privacy();
+let controller_landing = new LandingController();
+let controller_signup = new SignUpController();
+let controller_login = new LogInController();
+let controller_reset = new ResetController();
+let controller_privacy = new PrivacyController();
+let controller_about = new AboutController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
@@ -34,55 +37,42 @@ export function generateStateTemplate() {
     return dat;
 }
 
-kernel.use('/', function () {
-    return new Promise(function (resolve, reject) {
-        document.body.innerHTML =
-            (new StringTemplate(LandingView)).apply(generateStateTemplate());
-        resolve();
-    });
-});
+app.use('/', controller_landing.use);
 
-kernel.use('/about', function () {
-    //TODO use About.ts controller
-    return new Promise(function (resolve, reject) {
-        document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
-            (new StringTemplate(AboutView)).getContents();
-        resolve();
-    });
-});
+app.use('/about', controller_about.use);
 
-kernel.use('/signup', controller_signup.use);
-kernel.use('/login', controller_login.use);
-kernel.use('/reset', controller_reset.use);
-kernel.use('/privacy', controller_privacy.use);
+app.use('/signup', controller_signup.use);
+app.use('/login', controller_login.use);
+app.use('/reset', controller_reset.use);
+app.use('/privacy', controller_privacy.use);
 
-kernel.use('/contact', function () {
+app.use('/contact', function () {
     return new Promise(function (resolve, reject) {
-        document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
+        document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
             (new StringTemplate(ContactView)).getContents();
         resolve();
     });
 });
 
-kernel.use('/search/?(.+)?', function () {
+app.use('/search/?(.+)?', function () {
     console.log('SEARCH PAGE');
     return new Promise(function (resolve, reject) {
-        document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
+        document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
             (new StringTemplate(SearchView)).apply(generateStateTemplate());
         resolve();
     });
 });
 
-kernel.error('/([a-zA-Z0-9-]+)?', function () {
+app.error('/([a-zA-Z0-9-]+)?', function () {
     return new Promise(function (resolve, reject) {
         document.body.innerHTML =
-            document.body.innerHTML = (new Header()).apply(generateStateTemplate()) +
+            document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
                 (new StringTemplate(ErrorView)).apply(generateStateTemplate());
         resolve();
     });
 });
 
-kernel.subscribe('route', function () {
+app.subscribe('route', function () {
 
     const search_pill: any = document.getElementById('pill-search-expand');
     const search_pill_input: any = document.getElementById('pill-search');
@@ -106,9 +96,9 @@ kernel.subscribe('route', function () {
             if (search_pill_input.value !== "") {
                 if (!window.navigator['standalone']) {
                     /* iOS hides Safari address bar */
-                    window.history.pushState({data: "okay"}, "unknown", `//${window.location.hostname}:8084/search/${encodeURIComponent(search_pill_input.value)}`);
+                    window.history.pushState({data: "okay"}, "unknown", `//${window.location.hostname}:8080/search/${encodeURIComponent(search_pill_input.value)}`);
                 }
-                kernel.route(`/search/${encodeURIComponent(search_pill_input.value)}`);
+                app.route(`/search/${encodeURIComponent(search_pill_input.value)}`);
             } else {
                 this.blur();
 
@@ -124,9 +114,9 @@ kernel.subscribe('route', function () {
         if (search_pill_input.value !== "") {
             if (!window.navigator['standalone']) {
                 /* iOS hides Safari address bar */
-                window.history.pushState({data: "okay"}, "unknown", `//${window.location.hostname}:8084/search/${encodeURIComponent(search_pill_input.value)}`);
+                window.history.pushState({data: "okay"}, "unknown", `//${window.location.hostname}:8080/search/${encodeURIComponent(search_pill_input.value)}`);
             }
-            kernel.route(`/search/${encodeURIComponent(search_pill_input.value)}`);
+            app.route(`/search/${encodeURIComponent(search_pill_input.value)}`);
         }
     };
 
@@ -153,27 +143,8 @@ kernel.subscribe('route', function () {
 
 });
 
-kernel.route();
+app.route();
 
-document.body.addEventListener('click', function (event) {
-    const clickedElem: any = event.target;
-    let target = clickedElem.closest("a");
-    console.log('CLICKED ON', clickedElem, target);
-    if (target && target.hasAttribute('href')) {
-        let rel_route = target.getAttribute('href').replace(`//${window.location.hostname}:8084`, "");
-        if (!window.navigator['standalone']) {
-            /* iOS hides Safari address bar */
-            window.history.pushState({data: "okay"}, "unknown", target.getAttribute('href'));
-        }
-        kernel.route(rel_route);
-        /* iOS re-orientation fix */
-        event.preventDefault();
-    }
-}, false);
-
-window.addEventListener('popstate', function (e) {
-    kernel.route();
-});
 
 function logEvent(event) {
     console.log(event.type);
@@ -186,7 +157,7 @@ window.applicationCache.addEventListener('cached', logEvent, false);
 window.applicationCache.addEventListener('updateready', logEvent, false);
 window.applicationCache.addEventListener('obsolete', logEvent, false);
 window.applicationCache.addEventListener('error', logEvent, false);
-
+/*
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.js')
@@ -194,3 +165,4 @@ if ('serviceWorker' in navigator) {
             console.log("Service Worker Registered");
         });
 }
+*/

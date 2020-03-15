@@ -2,7 +2,7 @@ import {Module} from "./module/Module";
 import {Layer} from "./Layer";
 import {Subscribe} from "./subscribe/Subscribe";
 
-export class Kernel extends Subscribe {
+export class ApplicationRouter extends Subscribe{
 
 	private _modules: Module[] = [];
 	private stack:Array<Layer>;
@@ -10,9 +10,30 @@ export class Kernel extends Subscribe {
 
 	constructor() {
 		super();
+		let app = this;
 		this._modules = [];
 		this.stack = [];
 		this.error_stack = [];
+
+		document.body.addEventListener('click', function (event) {
+			const clickedElem: any = event.target;
+			let target = clickedElem.closest("a");
+			if (target && target.hasAttribute('href')) {
+				let rel_route = target.getAttribute('href').replace(`//${window.location.hostname}:8080`, "");
+				if (!window.navigator['standalone']) {
+					/* iOS hides Safari address bar */
+					window.history.pushState({data: "okay"}, "unknown", target.getAttribute('href'));
+				}
+				app.route(rel_route);
+				/* iOS re-orientation fix */
+				event.preventDefault();
+			}
+		}, false);
+
+		window.addEventListener('popstate', function (e) {
+			app.route();
+		});
+
 	}
 
 	registerModule(module: Module) {

@@ -1,5 +1,9 @@
 {
  "name": "OakFrame",
+ "scope": "/",
+ "start_url": "/",
+ "display": "fullscreen",
+ "orientation": "any",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
@@ -13,6 +17,7 @@
    "type": "image\/png",
    "density": "1.0"
   },
+
   {
    "src": "\/android-icon-72x72.png",
    "sizes": "72x72",

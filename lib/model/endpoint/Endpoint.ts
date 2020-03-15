@@ -6,14 +6,15 @@ import {ServerResponse} from "http";
 export class Endpoint {
     private _url: string;
     private _routes: any[] = [];
-    private _subscribe:Subscribe;
+    private _subscribe: Subscribe;
+    private _clients: any[] = [];
 
     constructor() {
         this._subscribe = new Subscribe();
         this._url = 'localhost';
     }
 
-    route(request:IncomingMessageQueryParam, response:ServerResponse) {
+    route(request: IncomingMessageQueryParam, response: ServerResponse) {
 
         for (let i = 0; i < this._routes.length; i++) {
             let route = this._routes[i];
@@ -52,25 +53,43 @@ export class Endpoint {
         this._routes.push({route: route, handler: handler});
     }
 
-    subscribe(route:string, callback:any){
+    subscribe(route: string, callback: any) {
         this._subscribe.subscribe(route, callback)
     }
 
-    handle(connection){
+    handle(connection) {
 
         let endpoint = this;
 
-        connection.send(JSON.stringify({msg: `Ahoy!`}));
+        endpoint._clients.push(connection);
 
         connection.on('message', function (message) {
             if (message.type === 'utf8') {
-               endpoint._subscribe.publish(JSON.parse(message.utf8Data), connection);
+                let json = JSON.parse(message.utf8Data);
+                for (var key in json) {
+                    if (json.hasOwnProperty(key)) {
+                        let data = {data: json[key], connection: connection};
+                        endpoint._subscribe.publish(key, data);
+                    }
+                }
             }
         });
+    }
 
-        connection.on('close', function (connection) {
-            // close user connection
+    getClients() {
+        return this._clients;
+    }
+
+    removeClient() {
+        let idx = -1;
+        this.getClients().forEach(function (connection, i) {
+            if (!connection.connected) {
+                idx = i;
+            }
         });
+        if (idx >= 0) {
+            this._clients.splice(idx, 1);
+        }
     }
 
 }
