@@ -3,9 +3,10 @@ import {Layer} from "./Layer";
 
 describe('Layer', () => {
 
-    let layer = new Layer('a', function(){ return new Promise(function (resolve, reject) {
-        resolve('This is a test phrase');
-    })
+    let layer = new Layer('a', function () {
+        return new Promise(function (resolve, reject) {
+            resolve('This is a test phrase');
+        })
     });
 
     it('should be created', () => {

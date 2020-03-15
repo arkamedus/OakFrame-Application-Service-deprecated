@@ -1,6 +1,6 @@
 //** @class Template is like an HTML container
 import {replaceAll} from "../Utils";
-import {TemplateInterface} from "./TemplateInterface";
+import {TemplateInterface} from "../../interface/TemplateInterface";
 
 export class StringTemplate implements TemplateInterface {
     private readonly contents: string;

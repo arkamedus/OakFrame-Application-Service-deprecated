@@ -91,8 +91,8 @@ export class ApplicationServer implements StackInterface {
         });
 
         server.listen(port, () => {
-            require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-                self.hostname = add;
+            require('dns').lookup(require('os').hostname(), function (err, address, fam) {
+                self.hostname = address;
                 console.log(`Core HTTP Server is listening on ${self.hostname}:${port}`)
             });
         });

@@ -1,5 +1,5 @@
 import {Subscriber} from "./Subscriber";
-import {SubscribeInterface} from "../SubscribeInterface";
+import {SubscribeInterface} from "../../interface/SubscribeInterface";
 
 export class Subscribe implements SubscribeInterface{
 

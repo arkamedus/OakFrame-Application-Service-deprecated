@@ -1,6 +1,6 @@
 import {existsSync, readFileSync} from "fs";
 import {replaceAll} from "./Utils";
-import {TemplateInterface} from "./template/TemplateInterface";
+import {TemplateInterface} from "../interface/TemplateInterface";
 
 export class Template implements TemplateInterface {
 

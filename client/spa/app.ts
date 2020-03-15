@@ -23,7 +23,7 @@ let controller_login    = new LogInController();
 let controller_reset    = new ResetController();
 let controller_privacy  = new PrivacyController();
 let controller_about    = new AboutController();
-let controller_contact    = new ContactController();
+let controller_contact  = new ContactController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
@@ -47,7 +47,6 @@ app.use('/privacy', controller_privacy.use);
 app.use('/contact', controller_contact.use);
 
 app.use('/search/?(.+)?', function () {
-    console.log('SEARCH PAGE');
     return new Promise(function (resolve, reject) {
         document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
             (new StringTemplate(SearchView)).apply(generateStateTemplate());
@@ -137,7 +136,7 @@ app.subscribe('route', function () {
 
 app.route();
 
-
+/*
 function logEvent(event) {
     console.log(event.type);
 }
@@ -149,7 +148,7 @@ window.applicationCache.addEventListener('cached', logEvent, false);
 window.applicationCache.addEventListener('updateready', logEvent, false);
 window.applicationCache.addEventListener('obsolete', logEvent, false);
 window.applicationCache.addEventListener('error', logEvent, false);
-/*
+
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
         .register('/sw.js')

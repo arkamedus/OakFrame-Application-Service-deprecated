@@ -1,6 +1,6 @@
 import {Module} from "./module/Module";
 import {Layer} from "./Layer";
-import {SubscribeInterface} from "./SubscribeInterface";
+import {SubscribeInterface} from "../interface/SubscribeInterface";
 import {ModuleRouter} from "./ModuleRouter";
 
 export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
@@ -11,7 +11,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
     private _subscribers: any[];
 
     constructor() {
-        this._subscribers= [];
+        this._subscribers = [];
         let app = this;
         this._modules = [];
         this.stack = [];
