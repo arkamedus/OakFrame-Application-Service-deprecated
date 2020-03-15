@@ -1,7 +1,6 @@
 import {ApplicationRouter} from "../../lib/model/ApplicationRouter";
 import {StringTemplate} from "../../lib/model/template/StringTemplate";
 import HeaderView from "./view/Header.html";
-import LandingView from './view/Landing.html';
 import ErrorView from './view/Error.html';
 import ContactView from './view/Contact.html';
 import SearchView from './view/Search.html';
@@ -12,17 +11,19 @@ import {ResetController} from "./controller/ResetController";
 import {PrivacyController} from "./controller/PrivacyController";
 import {AboutController} from "./controller/AboutController";
 import {LandingController} from "./controller/LandingController";
+import {ContactController} from "./controller/ContactController";
 
 let app = <ApplicationRouter>new ApplicationRouter();
 
 let account = new Account();
 
-let controller_landing = new LandingController();
-let controller_signup = new SignUpController();
-let controller_login = new LogInController();
-let controller_reset = new ResetController();
-let controller_privacy = new PrivacyController();
-let controller_about = new AboutController();
+let controller_landing  = new LandingController();
+let controller_signup   = new SignUpController();
+let controller_login    = new LogInController();
+let controller_reset    = new ResetController();
+let controller_privacy  = new PrivacyController();
+let controller_about    = new AboutController();
+let controller_contact    = new ContactController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
@@ -38,21 +39,12 @@ export function generateStateTemplate() {
 }
 
 app.use('/', controller_landing.use);
-
 app.use('/about', controller_about.use);
-
 app.use('/signup', controller_signup.use);
 app.use('/login', controller_login.use);
 app.use('/reset', controller_reset.use);
 app.use('/privacy', controller_privacy.use);
-
-app.use('/contact', function () {
-    return new Promise(function (resolve, reject) {
-        document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
-            (new StringTemplate(ContactView)).getContents();
-        resolve();
-    });
-});
+app.use('/contact', controller_contact.use);
 
 app.use('/search/?(.+)?', function () {
     console.log('SEARCH PAGE');
