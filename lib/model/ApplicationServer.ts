@@ -48,7 +48,7 @@ export class ApplicationServer implements StackInterface {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
                     layer.fn(route).then(function () {
-                        if (route.dropout){
+                        if (route.dropout) {
                             return resolve();
                         }
                         process();
@@ -61,6 +61,7 @@ export class ApplicationServer implements StackInterface {
                     resolve();
                 }
             }
+
             process();
         });
 

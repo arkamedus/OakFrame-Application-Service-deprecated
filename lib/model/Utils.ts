@@ -2,6 +2,14 @@ export function replaceAll(str: any, search: any, replace: any) {
     return str.replace(new RegExp('' + search + '', 'g'), replace);
 }
 
+export function combine(objects:Array<any>){
+    let v = {};
+        objects.forEach(function (a) {
+            Object.assign(v,a);
+        });
+    return v;
+}
+
 export function slugify(str) {
     str = String(str).toString();
     str = str.replace(/^\s+|\s+$/g, ""); // trim

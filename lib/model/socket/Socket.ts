@@ -5,7 +5,7 @@ export class Socket {
     private _socket: WebSocket;
     private _subscribe: Subscribe;
 
-    constructor(){
+    constructor() {
         this._subscribe = new Subscribe();
     }
 
@@ -17,7 +17,7 @@ export class Socket {
         this._socket.onopen = function (e) {
             console.log('connected:', e);
             this.send(JSON.stringify({
-                handshake:true
+                handshake: true
             }));
         };
         this._socket.onmessage = function (e) {
@@ -36,7 +36,7 @@ export class Socket {
         }
     }
 
-    subscribe(slug:string, fn): any {
+    subscribe(slug: string, fn): any {
         this._subscribe.subscribe(slug, fn);
     }
 

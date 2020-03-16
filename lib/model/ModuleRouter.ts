@@ -4,7 +4,7 @@ export class ModuleRouter {
 
     public _modules: Module[] = [];
 
-    registerModule(module: Module) {
+    focusModule(module: Module) {
         this._modules.push(module)
     }
 

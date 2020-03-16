@@ -2,7 +2,6 @@ import {ApplicationRouter} from "../../lib/model/ApplicationRouter";
 import {StringTemplate} from "../../lib/model/template/StringTemplate";
 import HeaderView from "./view/Header.html";
 import ErrorView from './view/Error.html';
-import ContactView from './view/Contact.html';
 import SearchView from './view/Search.html';
 import {Account} from "./model/Account";
 import {SignUpController} from "./controller/SignUpController";
@@ -12,27 +11,33 @@ import {PrivacyController} from "./controller/PrivacyController";
 import {AboutController} from "./controller/AboutController";
 import {LandingController} from "./controller/LandingController";
 import {ContactController} from "./controller/ContactController";
+import {CounterController} from "./controller/CounterController";
 
-let app = <ApplicationRouter>new ApplicationRouter();
+let app: ApplicationRouter = new ApplicationRouter();
 
-let account = new Account();
+let account: Account = new Account();
 
-let controller_landing  = new LandingController();
-let controller_signup   = new SignUpController();
-let controller_login    = new LogInController();
-let controller_reset    = new ResetController();
-let controller_privacy  = new PrivacyController();
-let controller_about    = new AboutController();
-let controller_contact  = new ContactController();
+let controller_landing = new LandingController();
+let controller_signup = new SignUpController();
+let controller_login = new LogInController();
+let controller_reset = new ResetController();
+let controller_privacy = new PrivacyController();
+let controller_about = new AboutController();
+let controller_contact = new ContactController();
+let controller_counter = new CounterController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
 
-    let dat:any = {hostname: window.location.hostname, search: decodeURIComponent(query), search_safe: decodeURIComponent(query).replace(/"/g, '&quot;')};
+    let dat: any = {
+        hostname: window.location.hostname,
+        search: decodeURIComponent(query),
+        search_safe: decodeURIComponent(query).replace(/"/g, '&quot;')
+    };
 
-    if (!account.isAuthenticated()){
+    if (!account.isAuthenticated()) {
         dat.profile_link = "login";
-    }else{
+    } else {
         dat.profile_link = "profile";
     }
     return dat;
@@ -45,6 +50,7 @@ app.use('/login', controller_login.use);
 app.use('/reset', controller_reset.use);
 app.use('/privacy', controller_privacy.use);
 app.use('/contact', controller_contact.use);
+app.use('/counter', controller_counter.use);
 
 app.use('/search/?(.+)?', function () {
     return new Promise(function (resolve, reject) {

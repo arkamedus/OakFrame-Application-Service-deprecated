@@ -23,7 +23,7 @@ export class CookieSession implements MiddlewareInterface {
         let parts = input.split(';');
         let ob = {};
 
-        parts.forEach(function(part, i){
+        parts.forEach(function (part, i) {
             parts[i] = part.trim();
             let e = parts[i].split('=');
             ob[e[0]] = e[1];

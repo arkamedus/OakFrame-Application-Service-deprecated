@@ -1,3 +1,3 @@
 export interface AccountHandler {
-    isAuthenticated():boolean;
+    isAuthenticated(): boolean;
 }

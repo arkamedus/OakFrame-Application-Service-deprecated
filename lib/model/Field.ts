@@ -6,7 +6,7 @@ export class Field {
         this._type = type;
         if (value) {
             this._value = value;
-        }else{
+        } else {
             this._value = null;
         }
     }

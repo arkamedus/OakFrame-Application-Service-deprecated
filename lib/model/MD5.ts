@@ -30,15 +30,20 @@ export function MD5(e) {
     }
 
     function p(a) {
-        var b:string = "",
-            d:string = "",
-            c:number, q:number;
-        for (c = 0; 3 >= c; c++){ q = a >>> 8 * c & 255; d = "0" + q.toString(16); b += d.substr(d.length - 2, 2); }
+        var b: string = "",
+            d: string = "",
+            c: number, q: number;
+        for (c = 0; 3 >= c; c++) {
+            q = a >>> 8 * c & 255;
+            d = "0" + q.toString(16);
+            b += d.substr(d.length - 2, 2);
+        }
         return b
     }
+
     var f = [],
         q, r, s, t, a, b, c, d;
-    e = function(a) {
+    e = function (a) {
         a = a.replace(/\r\n/g, "\n");
         for (var b = "", d = 0; d < a.length; d++) {
             var c = a.charCodeAt(d);
@@ -46,7 +51,7 @@ export function MD5(e) {
         }
         return b
     }(e);
-    f = function(b) {
+    f = function (b) {
         var a, c = b.length;
         a = c + 8;
         for (var d = 16 * ((a - a % 64) / 64 + 1), e = Array(d - 1), f = 0, g = 0; g < c;) a = (g - g % 4) / 4, f = g % 4 * 8, e[a] |= b.charCodeAt(g) << f, g++;

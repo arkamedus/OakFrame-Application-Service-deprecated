@@ -15,7 +15,7 @@ export class Route implements RouteInterface {
     style: Array<string>;
     request: IncomingMessageQueryParam;
     response: ServerResponse;
-    dropout:boolean;
+    dropout: boolean;
 
     constructor() {
         this.body = [];
@@ -86,7 +86,7 @@ ${self.body.join(' ')}
         this.response = response;
     }
 
-    end(){
+    end() {
         this.dropout = true;
     }
 

@@ -38,7 +38,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
     }
 
-    registerModule(module: Module) {
+    public focusModule(module: Module) {
         this._modules.push(module)
     }
 
@@ -63,11 +63,16 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             }
         });
 
+            this._modules.forEach(function(module){
+                module.defocus();
+            });
+            this._modules = [];
+
         return new Promise(function (resolve, reject) {
             function process() {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
-                    layer.fn().then(function () {
+                    layer.fn(self).then(function () {
                         process();
                     }).catch(function (e) {
                         console.trace(e, "chain failure");
@@ -81,7 +86,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             function process_error() {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
-                    layer.fn().then(function () {
+                    layer.fn(self).then(function () {
                         process_error();
                     }).catch(function (e) {
                         console.trace(e, "chain failure");
@@ -101,6 +106,9 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
         }).then(function () {
             self.publish('route', false);
+            self._modules.forEach(function(module){
+                module.focus();
+            });
         });
 
     }

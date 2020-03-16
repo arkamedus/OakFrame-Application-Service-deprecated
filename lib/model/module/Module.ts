@@ -1,43 +1,25 @@
 import {Provider} from "../../interface/Provider";
+import {ApplicationRouter} from "../ApplicationRouter";
 
 export class Module {
 
 	/** Fast interface to determine if module has been initialized **/
 	private _initialized: boolean = false;
 
-	private _init(): any {
-	}
+	public init = ():any => {};
 
-	update(): void {
+	public update = ():any => {};
 
-	}
+	public focus = ():any => {};
 
-	focus(): void {
+	public defocus = ():any => {};
 
-	}
+	public render = ():any => {};
 
-	defocus(): void {
-
-	}
-
-	render() {
-
-	}
-
-	initialized(): boolean {
+	isInitialized(): boolean {
 		return this._initialized;
 	}
 
-	get init(): any {
-		return this._init;
-	}
-
-	set init(fn) {
-		this._init = fn;
-	}
-
-	use(param?:any):any{
-
-	}
+	public use = (app?:ApplicationRouter):any => {};
 
 }
