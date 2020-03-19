@@ -83,6 +83,10 @@
   order: 1;
 }
 
+.no-select {
+  user-select: none;
+}
+
 @media screen and (max-width: 42em) {
   .hide-mobile {
     display: none;
@@ -165,6 +169,10 @@
 
 [class*=last] {
   order: 1;
+}
+
+.no-select {
+  user-select: none;
 }
 
 .navbar {
@@ -280,6 +288,10 @@
 
 [class*=last] {
   order: 1;
+}
+
+.no-select {
+  user-select: none;
 }
 
 .dropdown {
@@ -419,6 +431,10 @@
   order: 1;
 }
 
+.no-select {
+  user-select: none;
+}
+
 .text-center {
   text-align: center;
 }
@@ -525,6 +541,10 @@ label {
   order: 1;
 }
 
+.no-select {
+  user-select: none;
+}
+
 input[type=text], input[type=email], input[type=password], textarea, input[type=submit], button {
   width: 100%;
   border: none;
@@ -580,12 +600,19 @@ body, html {
   background-color: #eff;
   position: absolute;
   top: 0;
+  height: -webkit-fill-available;
+  width: 100vw;
 }
 
-.hero {
-  width: 100vw;
-  height: 100vh;
-  height: -webkit-fill-available;
+.navbar ~ .hero {
+  background-color: #eff;
+  position: relative;
+  height: calc( 100vh - 50px);
+}
+
+.hero.graph {
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px), linear-gradient(-90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px), linear-gradient(transparent 9px, #f2f2f2 9px, #f2f2f2 120px, transparent 120px), linear-gradient(-90deg, #aaa 1px, transparent 1px), linear-gradient(-90deg, transparent 9px, #f2f2f2 3px, #f2f2f2 120px, transparent 120px), linear-gradient(#aaa 1px, transparent 1px), #f2f2f2;
+  background-size: 16px 16px, 16px 16px, 128px 128px, 128px 128px, 128px 128px, 128px 128px, 128px 128px, 128px 128px;
 }
 
 h1, h2, h3, h4 {
@@ -615,6 +642,13 @@ body .container:last-of-type {
     width: 100%;
   }
 }
+.node {
+  width: 200px;
+  display: inline-block;
+  background: rgba(5, 5, 5, 0.42);
+  position: absolute;
+}
+
 @media screen and (max-width: 42em) {
   .hide-mobile {
     display: none;
@@ -697,6 +731,10 @@ body .container:last-of-type {
 
 [class*=last] {
   order: 1;
+}
+
+.no-select {
+  user-select: none;
 }
 
 @media (prefers-color-scheme: dark) {

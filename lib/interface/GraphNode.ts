@@ -10,7 +10,7 @@ export interface GraphNode {
 	_name: string;
 	_display: any;
 	_graph: Graph;
-	_element: GraphNodeHTMLElement;
+	_element: GraphNodeHTMLElement | HTMLElement;
 
 	_evaluate(input: any): any;
 

@@ -3,7 +3,7 @@ import {GraphNode} from "../../interface/GraphNode";
 import {GraphNodeHTMLElement} from "../../interface/GraphNodeHTMLElement";
 
 /** @class ButtonNode **/
-class ButtonNode implements GraphNode {
+export class ButtonNode implements GraphNode {
 	_value: any;
 	_name: string = "Button";
 	_display: any;
@@ -21,14 +21,19 @@ class ButtonNode implements GraphNode {
 	}
 
 	_render(element: HTMLElement): any {
-
+		let self = this;
+		let id = (((Math.random()*120000)+1)|0)+"";
 		//this._element.element.appendChild(info.element);
 		//this._element.element.appendChild(action.element);
-		this._element.innerHTML = `<p>${this._name}<br /><button id="activate">Activate</button></p>`;
+		this._element.element.innerHTML = `<p>${this._name}<br /><button id="${id}">Activate</button></p>`;
 
 		console.log(element);
 		console.log(this._name);
 		element.appendChild(this._element.element);
+
+		document.getElementById(id).onclick = function(){
+			self._evaluate();
+		}
 
 	}
 

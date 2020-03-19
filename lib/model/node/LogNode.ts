@@ -3,7 +3,7 @@ import {GraphNode} from "../../interface/GraphNode";
 import {GraphNodeHTMLElement} from "../../interface/GraphNodeHTMLElement";
 
 /** @class LogNode **/
-class LogNode implements GraphNode {
+export class LogNode implements GraphNode {
 	_graph: Graph;
 	_inputs: GraphNode[] = [];
 	_outputs: GraphNode[] = [];
@@ -26,12 +26,10 @@ class LogNode implements GraphNode {
 		for (let i = 0; i < this._value.length; i++) {
 			str = str + this._value[i] + '<br>';
 		}
-		this._element.innerHTML = str;
+		this._element.element.innerHTML = str;
 		console.log(element);
 		console.log(this._name);
 		element.appendChild(this._element.element);
-
-
 	}
 
 	_evaluate(log: string): void {

@@ -12,6 +12,7 @@ import {AboutController} from "./controller/AboutController";
 import {LandingController} from "./controller/LandingController";
 import {ContactController} from "./controller/ContactController";
 import {CounterController} from "./controller/CounterController";
+import {GraphController} from "./controller/GraphController";
 
 let app: ApplicationRouter = new ApplicationRouter();
 
@@ -25,6 +26,7 @@ let controller_privacy = new PrivacyController();
 let controller_about = new AboutController();
 let controller_contact = new ContactController();
 let controller_counter = new CounterController();
+let controller_graph = new GraphController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
@@ -43,7 +45,7 @@ export function generateStateTemplate() {
     return dat;
 }
 
-app.use('/', controller_landing.use);
+app.use('/',    controller_landing.use);
 app.use('/about', controller_about.use);
 app.use('/signup', controller_signup.use);
 app.use('/login', controller_login.use);
@@ -51,6 +53,7 @@ app.use('/reset', controller_reset.use);
 app.use('/privacy', controller_privacy.use);
 app.use('/contact', controller_contact.use);
 app.use('/counter', controller_counter.use);
+app.use('/graph', controller_graph.use);
 
 app.use('/search/?(.+)?', function () {
     return new Promise(function (resolve, reject) {

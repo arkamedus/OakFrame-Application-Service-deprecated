@@ -3,7 +3,7 @@ import {GraphNode} from "../../interface/GraphNode";
 import {GraphNodeHTMLElement} from "../../interface/GraphNodeHTMLElement";
 
 /** @class TextNode **/
-class TextNode implements GraphNode {
+export class TextNode implements GraphNode {
 	_graph: Graph;
 	_inputs: GraphNode[] = [];
 	_outputs: GraphNode[] = [];
@@ -21,12 +21,17 @@ class TextNode implements GraphNode {
 	}
 
 	_render(element: HTMLElement): any {
-
-		this._element.innerHTML = `<p>${this._name}<br /><input id="text" type="text" value="${this._value}"/></p>`;
+		let self = this;
+		let id = (((Math.random()*120000)+1)|0)+"";
+		this._element.element.innerHTML = `<p>${this._name}<br /><input id="${id}" type="text" value="${this._value}"/></p>`;
 		console.log(element);
 		console.log(this._name);
 		element.appendChild(this._element.element);
 
+		let input = <HTMLInputElement>document.getElementById(id);
+		input.onkeyup = function(){
+			self._value = input.value;
+		}
 	}
 
 	_evaluate(input:any): void {

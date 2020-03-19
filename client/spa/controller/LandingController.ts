@@ -6,7 +6,7 @@ import {ApplicationRouter} from "../../../lib/model/ApplicationRouter";
 
 export class LandingController extends Module {
 
-    use = (app?:ApplicationRouter) => {
+    use = (app?: ApplicationRouter) => {
 
         return new Promise(function (resolve, reject) {
             document.body.innerHTML = (new StringTemplate(LandingView)).apply(generateStateTemplate());

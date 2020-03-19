@@ -3,7 +3,7 @@ import {GraphNode} from "../../interface/GraphNode";
 import {Graph} from "../Graph";
 import {GraphNodeHTMLElement} from "../../interface/GraphNodeHTMLElement";
 
-class AlertNode implements GraphNode {
+export class AlertNode implements GraphNode {
 	_value: any;
 	_graph: Graph;
 	_inputs: GraphNode[] = [];
@@ -21,7 +21,7 @@ class AlertNode implements GraphNode {
 	}
 
 	_render(element: HTMLElement): void {
-		this._element.innerHTML = this._name;
+		this._element.element.innerHTML = this._name;
 		console.log(element);
 		console.log(this._name);
 		element.appendChild(this._element.element);
