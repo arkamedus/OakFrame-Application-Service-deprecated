@@ -13,10 +13,12 @@ import {LandingController} from "./controller/LandingController";
 import {ContactController} from "./controller/ContactController";
 import {CounterController} from "./controller/CounterController";
 import {GraphController} from "./controller/GraphController";
+import {Searcher} from "../../lib/model/Searcher";
 
-let app: ApplicationRouter = new ApplicationRouter();
+export let app: ApplicationRouter = new ApplicationRouter();
 
 let account: Account = new Account();
+export const search_handler = new Searcher();
 
 let controller_landing = new LandingController();
 let controller_signup = new SignUpController();
@@ -45,7 +47,7 @@ export function generateStateTemplate() {
     return dat;
 }
 
-app.use('/',    controller_landing.use);
+app.use('/', controller_landing.use);
 app.use('/about', controller_about.use);
 app.use('/signup', controller_signup.use);
 app.use('/login', controller_login.use);
@@ -57,8 +59,28 @@ app.use('/graph', controller_graph.use);
 
 app.use('/search/?(.+)?', function () {
     return new Promise(function (resolve, reject) {
+
+        let search_results = search_handler.search(generateStateTemplate().search);
+
+        let data: any = {};
+        Object.assign(data, generateStateTemplate());
+
+        if (search_results.length === 0) {
+            data.results = `No results found for "${data.search_safe}".`;
+        } else {
+            data.results = "";
+            search_results.forEach(function (result) {
+                result.id = ((Math.random() * 100000) | 0) + "";
+                data.results += `<div id="${result.id}"><h4>${result.title}</h4><p>${result.desc}</p></div>`;
+            });
+        }
+
         document.body.innerHTML = (new StringTemplate(HeaderView)).apply(generateStateTemplate()) +
-            (new StringTemplate(SearchView)).apply(generateStateTemplate());
+            (new StringTemplate(SearchView)).apply(data);
+        search_results.forEach(function (result) {
+            document.getElementById(result.id).onclick = result.fn;
+        });
+
         resolve();
     });
 });

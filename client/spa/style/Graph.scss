@@ -1,0 +1,34 @@
+$graph_small: 16px;
+$graph_lg:128px;
+$graph_intersect:8px;
+
+.graph {
+  background:
+          linear-gradient(-90deg, rgba(0,0,0,.05) 1px, transparent 1px),
+          linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+          linear-gradient(-90deg, rgba(0, 0, 0, .04) 1px, transparent 1px),
+          linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+          linear-gradient(transparent ($graph_intersect+1px), #f2f2f2 ($graph_intersect+1px), #f2f2f2 ($graph_lg - $graph_intersect), transparent ($graph_lg - $graph_intersect)),
+          linear-gradient(-90deg, #aaa 1px, transparent 1px),
+          linear-gradient(-90deg, transparent ($graph_intersect+1px), #f2f2f2 3px, #f2f2f2 ($graph_lg - $graph_intersect), transparent ($graph_lg - $graph_intersect)),
+          linear-gradient(#aaa 1px, transparent 1px),
+          #f2f2f2;
+  background-size:
+          $graph_small $graph_small,
+          $graph_small $graph_small,
+          $graph_lg $graph_lg,
+          $graph_lg $graph_lg,
+          $graph_lg $graph_lg,
+          $graph_lg $graph_lg,
+          $graph_lg $graph_lg,
+          $graph_lg $graph_lg;
+}
+
+#graph-render-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow:scroll;
+  user-zoom: zoom;
+  touch-action: manipulation;
+}

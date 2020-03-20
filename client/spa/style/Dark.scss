@@ -13,6 +13,10 @@
 
   .hero {
     background-color: #243f59;
+
+    .icon-huge {
+      color: rgba(255, 255, 255, 0.3);
+    }
   }
   .navbar-inner > *, .subnavbar > *, .main-footer > .pill {
     background-color: #444;
@@ -22,5 +26,9 @@
   }
   a {
     color: lightskyblue;
+  }
+
+  #pill-search {
+    color: #ddd;
   }
 }

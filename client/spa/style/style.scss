@@ -3,6 +3,7 @@
 @import "Dropdown";
 @import "Text";
 @import "Button";
+@import "Graph";
 
 * {
   -webkit-box-sizing: border-box;
@@ -43,37 +44,10 @@ body, html {
 }
 
 .navbar ~ .hero {
-  background-color: #eff;
   position: relative;
   height: calc( 100vh - 50px);
 }
 
-
-$graph_small: 16px;
-$graph_lg:128px;
-$graph_intersect:8px;
-
-.hero.graph {
-    background:
-            linear-gradient(-90deg, rgba(0,0,0,.05) 1px, transparent 1px),
-            linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
-            linear-gradient(-90deg, rgba(0, 0, 0, .04) 1px, transparent 1px),
-            linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
-            linear-gradient(transparent ($graph_intersect+1px), #f2f2f2 ($graph_intersect+1px), #f2f2f2 ($graph_lg - $graph_intersect), transparent ($graph_lg - $graph_intersect)),
-            linear-gradient(-90deg, #aaa 1px, transparent 1px),
-            linear-gradient(-90deg, transparent ($graph_intersect+1px), #f2f2f2 3px, #f2f2f2 ($graph_lg - $graph_intersect), transparent ($graph_lg - $graph_intersect)),
-            linear-gradient(#aaa 1px, transparent 1px),
-            #f2f2f2;
-    background-size:
-            $graph_small $graph_small,
-            $graph_small $graph_small,
-            $graph_lg $graph_lg,
-            $graph_lg $graph_lg,
-            $graph_lg $graph_lg,
-            $graph_lg $graph_lg,
-            $graph_lg $graph_lg,
-            $graph_lg $graph_lg;
-}
 
 h1, h2, h3, h4 {
   padding-top: $leading;

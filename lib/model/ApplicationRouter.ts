@@ -21,15 +21,8 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             const clickedElem: any = event.target;
             let target = clickedElem.closest("a");
             if (target && target.hasAttribute('href')) {
-                let rel_route = target.getAttribute('href').replace(`//${window.location.hostname}:8080`, "");
-                if (!window.navigator['standalone']) {
-                    /* iOS hides Safari address bar */
-                    window.history.pushState({data: "okay"}, "unknown", target.getAttribute('href'));
-                }
-                app.route(rel_route);
-                /* iOS re-orientation fix */
-                event.preventDefault();
-            }
+                app.goToPage(target.getAttribute('href'),event);
+                            }
         }, false);
 
         window.addEventListener('popstate', function (e) {
@@ -37,6 +30,18 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
         });
 
     }
+
+    public goToPage(route:string, event?){
+        let rel_route = route.replace(`//${window.location.hostname}:8080`, "");
+        if (!window.navigator['standalone']) {
+            /* iOS hides Safari address bar */
+            window.history.pushState({data: "okay"}, "unknown", route);
+        }
+        this.route(rel_route);
+        /* iOS re-orientation fix */
+        if (event){
+        event.preventDefault();
+    }}
 
     public focusModule(module: Module) {
         this._modules.push(module)
