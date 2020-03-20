@@ -1,0 +1,37 @@
+<div class="" style="background:#000;/*background:url('camera.gif');background-size:cover;background-position: 50% 50%;*/">
+    <video autoplay playsinline class="handsome" id="vid"></video>
+    <canvas id="cover"></canvas>
+    <canvas id="paint"></canvas>
+    <div class="tools dock">
+
+        <div class="flex space-between align-end">
+            <div class="col" style=" -webkit-flex-flow: row wrap;justify-content: space-around;">
+                nothing
+            </div>
+        <div class="col" style=" -webkit-flex-flow: row wrap;justify-content: space-around;">
+            <div id="take">
+                <div style="pointer-events: none;" class="col">
+                    <i class="fas fa-camera-retro fa-fw fa-2x"></i>
+                </div>
+            </div>
+        </div>
+
+        <div id="flip-button">
+            <div style="pointer-events: none;" class="col">
+                <i class="fas fa-sync fa-fw"></i>
+            </div>
+        </div>
+        </div>
+        <span class="strip"></span>
+    </div>
+
+
+    <div style="position:fixed;top:0;left:0;color:#fff;z-index:3;">
+        <button id="close" class="col" style="padding: 10px;">
+            <i data-feather="x"></i> X
+        </button>
+    </div>
+
+</div>
+
+<div class="clr"></div>

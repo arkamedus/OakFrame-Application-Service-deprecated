@@ -580,6 +580,76 @@ input[type=submit]:hover, button:hover {
   touch-action: manipulation;
 }
 
+.tools {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.tools > div > div {
+  padding: 10px;
+  color: #fff;
+  background: #000;
+}
+
+.dock button {
+  padding: 10px;
+  background-color: #F7F9F9;
+  color: rgba(38, 28, 21, 0.5);
+}
+
+.dock button.active {
+  color: #261C15;
+}
+
+#cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#paint {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  display: none;
+}
+
+#vid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.strip {
+  width: 100vw;
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: hidden;
+}
+
+.strip img {
+  max-width: 64px;
+  max-height: 64px;
+  border: 2px solid white;
+}
+
+.strip a {
+  transition: all 0.3s;
+}
+
+.strip a:nth-child(2n+1) {
+  transform: rotate(10deg);
+}
+
+.strip a:nth-child(2n+2) {
+  transform: rotate(-10deg);
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -630,6 +700,7 @@ h1, h2, h3, h4 {
 }
 
 .container, .nav-container {
+  position: relative;
   width: 100%;
   margin: 0 auto;
   max-width: 920pt;

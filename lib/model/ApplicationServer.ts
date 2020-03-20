@@ -83,18 +83,31 @@ export class ApplicationServer implements StackInterface {
         });
     }
 
-    public listen(port: number): void {
+    public listen(port: number, https?:boolean): void {
         let self = this;
         this.port = port;
-        let http = require('http');
-        let server: Server = http.createServer(function (request: IncomingMessageQueryParam, response: ServerResponse) {
-            self.http_listener(request, response);
-        });
+        let http = require('http'+(https?"s":''));
+        let server:Server;
+
+        if (!https) {
+            server = http.createServer(function (request: IncomingMessageQueryParam, response: ServerResponse) {
+                self.http_listener(request, response);
+            });
+        }else{
+            var _fs = require('fs');
+            const creds = {
+                key: _fs.readFileSync('/etc/letsencrypt/live/siakit.com/privkey.pem', 'utf8'),
+                cert: _fs.readFileSync('/etc/letsencrypt/live/siakit.com/fullchain.pem', 'utf8')
+            };
+            server = http.createServer(creds, function (request: IncomingMessageQueryParam, response: ServerResponse) {
+                self.http_listener(request, response);
+            });
+        }
 
         server.listen(port, () => {
             require('dns').lookup(require('os').hostname(), function (err, address, fam) {
-                self.hostname = address;
-                console.log(`Core HTTP Server is listening on ${self.hostname}:${port}`)
+                self.hostname = process.env.SITE_URL||address;
+                console.log(`Core HTTP${(https?"S":'')} Server is listening on ${self.hostname}:${port}`)
             });
         });
     }

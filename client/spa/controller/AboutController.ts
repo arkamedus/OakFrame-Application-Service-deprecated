@@ -11,7 +11,6 @@ export class AboutController extends Module {
     constructor(){
         super();
         search_handler.addResult(new SearchResult("About","Read and learn more about OakFrame",['about','about us','help','info','oakframe','oak'], function(){
-            console.log('ROUTING TO ABOTU',`//${window.location.hostname}:8080/about`);
             app.goToPage(`//${window.location.hostname}:8080/about`);
         }));
     }

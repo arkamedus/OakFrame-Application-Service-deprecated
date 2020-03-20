@@ -4,6 +4,7 @@ import {CookieSession} from "../../lib/model/middleware/CookieSession";
 import {Template} from "../../lib/model/Template";
 import {Analytics} from "../../lib/model/middleware/Analytics";
 import {Route} from "../../lib/model/Route";
+import {processes} from "systeminformation";
 
 let app = new ApplicationServer();
 
@@ -41,7 +42,7 @@ app.use('/([a-zA-Z0-9-/_)]+).(html|css|png|jpg|js|json|svg|mp3|wav|oft|ttf|gif|i
         if (existsSync(filename)) {
             route.getResponse().writeHead(200, {'Content-Type': _mimeTypes[route.getRequest().params[1]]});
             route.getResponse().end(
-                (new Template(filename)).apply({hostname: app.getHostname(), port: app.getPort()}), 'binary'
+                (new Template(filename)).apply({hostname: process.env.SITE_URL||app.getHostname(), port: process.env.SITE_PORT||app.getPort()}), 'binary'
             );
             route.end();
             resolve();
@@ -62,7 +63,7 @@ app.use('/([^.]+)?/?', function (route: Route) {
         if (existsSync(filename)) {
             route.getResponse().writeHead(200, {'Content-Type': `text/html`});
             route.getResponse().end(
-                (new Template(filename)).apply({hostname: app.getHostname(), port: app.getPort()}), 'binary'
+                (new Template(filename)).apply({hostname: process.env.SITE_URL||app.getHostname(), port: process.env.SITE_PORT||app.getPort()}), 'binary'
             );
         } else {
             console.error(`Unable to find ${filename}`);
@@ -73,4 +74,4 @@ app.use('/([^.]+)?/?', function (route: Route) {
 
 });
 
-app.listen(8080);
+app.listen(8080, !!parseInt(process.env.SITE_HTTPS)||false);
