@@ -183,6 +183,14 @@
   z-index: 9;
 }
 
+.footbar {
+  position: sticky;
+  padding: 10px 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 9;
+}
+
 .navbar-inner > *, .subnavbar > *, .main-footer > .pill {
   border-radius: 4px;
   background: #efefef;
@@ -691,6 +699,11 @@ body, html {
 .navbar ~ .hero {
   position: relative;
   height: calc( 100vh - 50px);
+}
+
+.navbar ~ .hero.with-footer {
+  position: relative;
+  height: calc( 100vh - 100px);
 }
 
 h1, h2, h3, h4 {

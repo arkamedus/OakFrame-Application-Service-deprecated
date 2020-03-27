@@ -49,6 +49,12 @@ body, html {
   height: calc( 100vh - 50px);
 }
 
+.navbar ~ .hero.with-footer {
+  position: relative;
+  height: calc( 100vh - 100px);
+}
+
+
 
 h1, h2, h3, h4 {
   padding-top: $leading;

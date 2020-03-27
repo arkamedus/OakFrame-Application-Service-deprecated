@@ -8,12 +8,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.html$/i,
-                loader: 'html-loader',
+                test: /\.html|.glsl$/i,
+                loader: 'raw-loader',
                 options: {
                     esModule: true,
                 }
-            },
+            }
         ],
     }
 };

@@ -1,10 +1,11 @@
 module.exports = {
+		mode: 'production',
 	entry: './app.js',
 	output: {
-		libraryTarget: "var",
+		libraryTarget: "var", //"var" | "assign" | "this" | "window" | "self" | "global" | "commonjs" | "commonjs2" | "commonjs-module" | "amd" | "amd-require" | "umd" | "umd2" | "jsonp" | "system"
 		filename: 'bundle.js'
 	},
-	target: "web",
+	target: "node",
 	module: {
 		rules: [
 			{

@@ -8,6 +8,14 @@
   z-index: 9;
 }
 
+.footbar {
+  position: sticky;
+  padding: $base-padding 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 9;
+}
+
 .navbar-inner > *, .subnavbar > *, .main-footer > .pill {
   border-radius: $radius-size;
   background: $pill-color;
