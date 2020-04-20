@@ -4,6 +4,7 @@ import {IncomingMessage, ServerResponse} from "http";
 export interface IncomingMessageQueryParam extends IncomingMessage {
     query: Array<string>;
     params: Array<string>;
+    slugs:Array<string>;
     cookies: any;
 }
 
@@ -54,13 +55,13 @@ export class Route implements RouteInterface {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" user-scalable="no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit:cover, maximum-scale=1.0, user-scalable=no">
 ${self.head.join(' ')}
 <style>
 ${style}
 </style>
 </head>
-<body>
+<body class="flex-col">
 ${self.body.join(' ')}
 <script type="text/javascript">${script}</script>
 </body>
