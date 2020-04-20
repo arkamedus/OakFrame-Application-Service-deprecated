@@ -2,7 +2,6 @@
   "name": "oakframe",
   "version": "1.0.1",
   "description": "`npm install -g ts-node` `npm install -g typescript`",
-  "main": "./dist/index.js",
   "scripts": {
     "test": "nyc mocha -r ts-node/register **/*.spec.ts"
   },
