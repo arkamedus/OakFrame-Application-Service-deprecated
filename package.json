@@ -2,33 +2,35 @@
   "name": "oakframe",
   "version": "1.0.1",
   "description": "`npm install -g ts-node` `npm install -g typescript`",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "nyc mocha -r ts-node/register **/*.spec.ts"
   },
+  "types": "./dist/index.d.ts",
   "bin": {
     "oakframe": "./cli.ts"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@types/chai": "^4.2.10",
     "@types/expect": "^24.3.0",
     "@types/mocha": "^7.0.2",
-    "@types/node": "^13.7.7",
+    "@types/node": "^13.13.1",
+    "@types/tracking": "^1.1.29",
     "aws-sdk": "^2.634.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "chai": "^4.2.0",
     "cookie-session": "^1.4.0",
-    "google-closure-compiler": "^20200224.0.0",
-    "html-loader": "^0.5.5",
     "istanbul": "^0.4.5",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
+    "raw-loader": "^4.0.0",
     "request": "^2.88.2",
     "ts-node": "^8.6.2",
     "typings": "^2.1.1",
+    "webpack": "^4.42.1",
     "websocket": "^1.0.31"
   }
 }
