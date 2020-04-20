@@ -15,7 +15,7 @@ describe('ServerProvider', () => {
 
     it('should have no available routes', (done) => {
 
-        request('http://localhost:3000', {json: true}, (err, res, body) => {
+        request('http://localhost:8080', {json: true}, (err, res, body) => {
             if (err) {
                 return console.log(err);
             }

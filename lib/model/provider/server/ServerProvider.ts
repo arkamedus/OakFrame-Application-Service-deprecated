@@ -16,7 +16,7 @@ export class ServerProvider implements Provider, Rest {
     constructor(endpoint: Endpoint) {
 
         this.http = require('http');
-        this.port = 3000;
+        this.port = 8080;
         this._endpoint = endpoint;
 
         const requestHandler = (request:IncomingMessageQueryParam, response:ServerResponse) => {

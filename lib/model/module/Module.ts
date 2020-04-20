@@ -1,5 +1,7 @@
 import {Provider} from "../../interface/Provider";
 import {ApplicationRouter} from "../ApplicationRouter";
+import {ApplicationServer} from "../ApplicationServer";
+import {Route} from "../Route";
 
 export class Module {
 
@@ -20,6 +22,6 @@ export class Module {
 		return this._initialized;
 	}
 
-	public use = (app?:ApplicationRouter):any => {};
+	public use = (route:Route, app?:ApplicationRouter|ApplicationServer):any => {};
 
 }

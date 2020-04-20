@@ -2,6 +2,9 @@ import {Module} from "./module/Module";
 import {Layer} from "./Layer";
 import {SubscribeInterface} from "../interface/SubscribeInterface";
 import {ModuleRouter} from "./ModuleRouter";
+import {StringTemplate} from "./template/StringTemplate";
+import {Route} from "./Route";
+import {Template} from "./Template";
 
 export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
@@ -9,8 +12,12 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
     private stack: Array<Layer>;
     private error_stack: Array<Layer>;
     private _subscribers: any[];
+    public Template(input){
+        return new StringTemplate(input);
+    }
 
     constructor() {
+        console.log('APPLICATION ROUTER');
         this._subscribers = [];
         let app = this;
         this._modules = [];
@@ -21,8 +28,8 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             const clickedElem: any = event.target;
             let target = clickedElem.closest("a");
             if (target && target.hasAttribute('href')) {
-                app.goToPage(target.getAttribute('href'),event);
-                            }
+                app.goToPage(target.getAttribute('href'), event);
+            }
         }, false);
 
         window.addEventListener('popstate', function (e) {
@@ -31,7 +38,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
     }
 
-    public goToPage(route:string, event?){
+    public goToPage(route: string, event?) {
         let rel_route = route.replace(`//${window.location.hostname}:8080`, "");
         if (!window.navigator['standalone']) {
             /* iOS hides Safari address bar */
@@ -39,9 +46,10 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
         }
         this.route(rel_route);
         /* iOS re-orientation fix */
-        if (event){
-        event.preventDefault();
-    }}
+        if (event) {
+            event.preventDefault();
+        }
+    }
 
     public focusModule(module: Module) {
         this._modules.push(module)
@@ -60,6 +68,9 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
         let request_url = url || window.location.pathname || window.location.href;
 
+        let route = new Route();
+
+        console.log('SHOULD BE ROUTING TO', request_url);
         let chain: Array<Layer> = [];
         this.stack.forEach(function (layer: Layer) {
             let match = request_url.match(layer.route);
@@ -68,16 +79,17 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             }
         });
 
-            this._modules.forEach(function(module){
-                module.defocus();
-            });
-            this._modules = [];
+        this._modules.forEach(function (module) {
+            module.defocus();
+        });
+
+        this._modules = [];
 
         return new Promise(function (resolve, reject) {
             function process() {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
-                    layer.fn(self).then(function () {
+                    layer.fn(route, self).then(function (value) {
                         process();
                     }).catch(function (e) {
                         console.trace(e, "chain failure");
@@ -110,8 +122,9 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
             }
 
         }).then(function () {
+            document.body.innerHTML = route.body.join('');
             self.publish('route', false);
-            self._modules.forEach(function(module){
+            self._modules.forEach(function (module) {
                 module.focus();
             });
         });

@@ -138,9 +138,78 @@ export function slugify(str) {
     });
 
     return str
-        .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+        .replace(/[^a-z0-9 -/]/g, "") // remove invalid chars
         .replace(/\s+/g, "-") // collapse whitespace and replace by -
         .replace(/-+/g, "-") // collapse dashes
         .replace(/^-+/, "") // trim - from start of text
         .replace(/-+$/, "");
+}
+
+function compare( a: string, b: string ) : number {
+
+    // Not all browsers support the extended options for localeCompare(). As such, let's
+    // wrap the extended version in a try/catch and just fall-back to using the simple
+    // version. In this case, we're going to use the "numeric" option, which gets the
+    // browser to treat embedded numbers AS NUMBERS, which allows for a more "natural
+    // sort" behavior.
+    try {
+
+        return( a.localeCompare( b, undefined, { numeric: true } ) );
+
+    } catch ( error ) {
+
+        console.warn( "Extended localeCompare() not supported in this browser." );
+        return( a.localeCompare( b ) );
+
+    }
+
+}
+
+export function alphaNumericSort( a, b ) : number {
+
+    return( compare( a.name.toUpperCase(), b.name.toUpperCase() ) );
+
+}
+
+export function capitalizeFirstLetter(string){
+   return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+export function generatePagination(page, page_size, total_items, url_base){
+
+    let pages = ((total_items/page_size)|0)+1;
+    let page_links = ``;
+
+    for (let i=Math.max(page-2, 1); i<=Math.min(page+2,pages); i++){
+        page_links += ` <a href="${url_base}/page/${i}" style="padding: 0 5px;cursor:pointer;"><strong ${page===i?'disabled':''}>${i}</strong></a> `;
+    }
+
+    let prev = `<button ${page<=1?'disabled':''} rel="prev">Previous</button>`;
+    let next = `<button ${page>=pages?'disabled':''} rel="next">Next</button>`;
+
+    if (page > 1){
+        prev = `<a href="${url_base}/page/${page-1}" rel="prev">${prev}</a>`
+    }
+    if (page < pages){
+        next = `<a href="${url_base}/page/${page+1}" rel="next">${next}</a>`
+    }
+
+    return `<div class="pagination">
+<small>Page ${page} of ${pages}</small><br/>${prev}${page_links}${next}
+</div>`;
+}
+
+function listToString(list) {
+    if (list.length === 1) {
+        return list[0];
+    }
+    if (typeof list === "string"){return list;}
+
+    let string = '';
+    for (let char = 0; char < list.length; char++) {
+        string += list[char];
+        if (char < list.length - 2) {string += ', ';} else if (char === list.length - 2) {string += ' and ';}
+    }
+
+    return string;
 }

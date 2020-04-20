@@ -3,9 +3,12 @@ import {replaceAll} from "../Utils";
 import {TemplateInterface} from "../../interface/TemplateInterface";
 
 export class StringTemplate implements TemplateInterface {
-    private readonly contents: string;
+    private contents: string;
     constructor(input: string) {
-        this.contents = input;
+        let self = this;
+        (async function() {
+            self.contents = require(input);
+        })();
     }
     getContents():string{
         return this.contents;

@@ -3,15 +3,22 @@ import {IncomingMessageQueryParam, Route} from "./Route";
 import {MiddlewareInterface} from "../interface/Middleware";
 import {StackInterface} from "../interface/StackInterface";
 import {Server, ServerResponse} from "http";
+import {Template} from "./Template";
 
 export class ApplicationServer implements StackInterface {
 
+    error_stack: Array<Layer>;
     stack: Array<Layer>;
     private hostname: string;
     private port: number;
 
+    public Template(input){
+        return new Template(input);
+    }
+
     constructor() {
         this.stack = [];
+        this.error_stack = [];
         this.hostname = "localhost";
         this.port = 8080;
     }
@@ -24,13 +31,18 @@ export class ApplicationServer implements StackInterface {
         this.stack.push(new Layer(route, fn));
     }
 
-    public route(route: Route) {
+    public error(route, fn?): void {
+        this.error_stack.push(new Layer(route, fn));
+    }
 
+    public route(route: Route) {
+        const self = this;
         let url = require('url');
         let url_parts = url.parse(route.getRequest().url, true);
 
         route.getRequest().query = url_parts.query;
         route.getRequest().url = route.getRequest().url.split("?")[0];
+        route.getRequest().slugs = route.getRequest().url.split('/').filter(function(slug){return slug !=='';});
 
         let chain: Array<Layer> = [];
         this.stack.forEach(function (layer: Layer) {
@@ -47,22 +59,43 @@ export class ApplicationServer implements StackInterface {
             function process() {
                 if (chain.length > 0) {
                     let layer: Layer = chain.shift();
-                    layer.fn(route).then(function () {
+                    layer.fn(route,self).then(function (v) {
                         if (route.dropout) {
                             return resolve();
                         }
                         process();
                     }).catch(function (e) {
-                        route.getResponse().end(`CHAIN FAILED`);
+                       // route.getResponse().end(`CHAIN FAILED`);
                         console.trace(e, "chain failure");
-                        reject('Chain Failed');
+                        //reject('Chain Failed');
+                        chain = self.error_stack.slice(0, self.error_stack.length);
+                        process_error();
                     });
                 } else {
                     resolve();
                 }
             }
 
-            process();
+            function process_error() {
+                if (chain.length > 0) {
+                    let layer: Layer = chain.shift();
+                    layer.fn(route, self).then(function () {
+                        process_error();
+                    }).catch(function (e) {
+                        console.trace(e, "chain failure");
+                        //reject('Chain Failed');
+                    });
+                } else {
+                    resolve();
+                }
+            }
+
+            if (chain.length > 0) {
+                process();
+            } else {
+                chain = self.error_stack.slice(0, self.error_stack.length);
+                process_error();
+            }
         });
 
     }
@@ -83,17 +116,17 @@ export class ApplicationServer implements StackInterface {
         });
     }
 
-    public listen(port: number, https?:boolean): void {
+    public listen(port: number, https?: boolean): void {
         let self = this;
         this.port = port;
-        let http = require('http'+(https?"s":''));
-        let server:Server;
+        let http = require('http' + (https ? "s" : ''));
+        let server: Server;
 
         if (!https) {
             server = http.createServer(function (request: IncomingMessageQueryParam, response: ServerResponse) {
                 self.http_listener(request, response);
             });
-        }else{
+        } else {
             var _fs = require('fs');
             const creds = {
                 key: _fs.readFileSync('/etc/letsencrypt/live/siakit.com/privkey.pem', 'utf8'),
@@ -106,8 +139,8 @@ export class ApplicationServer implements StackInterface {
 
         server.listen(port, () => {
             require('dns').lookup(require('os').hostname(), function (err, address, fam) {
-                self.hostname = process.env.SITE_URL||address;
-                console.log(`Core HTTP${(https?"S":'')} Server is listening on ${self.hostname}:${port}`)
+                self.hostname = process.env.SITE_URL || address;
+                console.log(`Core HTTP${(https ? "S" : '')} Server is listening on ${self.hostname}:${port}`)
             });
         });
     }
