@@ -17,7 +17,6 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
     }
 
     constructor() {
-        console.log('APPLICATION ROUTER');
         this._subscribers = [];
         let app = this;
         this._modules = [];
@@ -70,7 +69,6 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
 
         let route = new Route();
 
-        console.log('SHOULD BE ROUTING TO', request_url);
         let chain: Array<Layer> = [];
         this.stack.forEach(function (layer: Layer) {
             let match = request_url.match(layer.route);
@@ -92,7 +90,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
                     layer.fn(route, self).then(function (value) {
                         process();
                     }).catch(function (e) {
-                        console.trace(e, "chain failure");
+                       // console.trace(e, "chain failure");
                         reject('Chain Failed');
                     });
                 } else {
@@ -106,7 +104,7 @@ export class ApplicationRouter implements ModuleRouter, SubscribeInterface {
                     layer.fn(self).then(function () {
                         process_error();
                     }).catch(function (e) {
-                        console.trace(e, "chain failure");
+                       // console.trace(e, "chain failure");
                         reject('Chain Failed');
                     });
                 } else {

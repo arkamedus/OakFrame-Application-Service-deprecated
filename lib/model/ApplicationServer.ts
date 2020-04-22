@@ -9,6 +9,7 @@ export class ApplicationServer implements StackInterface {
 
     error_stack: Array<Layer>;
     stack: Array<Layer>;
+    middleware_stack: Array<Layer>;
     private hostname: string;
     private port: number;
 
@@ -19,12 +20,17 @@ export class ApplicationServer implements StackInterface {
     constructor() {
         this.stack = [];
         this.error_stack = [];
+        this.middleware_stack = [];
         this.hostname = "localhost";
         this.port = 8080;
     }
 
     public register(middleware: MiddlewareInterface) {
         middleware.setup(this);
+    }
+
+    public middleware(route, fn?){
+        this.middleware_stack.push(new Layer(route, fn));
     }
 
     public use(route, fn?): void {
@@ -91,9 +97,10 @@ export class ApplicationServer implements StackInterface {
             }
 
             if (chain.length > 0) {
+                chain = chain.concat(self.middleware_stack);
                 process();
             } else {
-                chain = self.error_stack.slice(0, self.error_stack.length);
+                chain = self.error_stack.slice(0, self.error_stack.length).concat(self.middleware_stack);
                 process_error();
             }
         });

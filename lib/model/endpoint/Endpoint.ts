@@ -24,7 +24,6 @@ export class Endpoint {
                 try {
                     return route.handler(request, response);
                 } catch (err) {
-                    console.log(err.stack);
                     return response.end(JSON.stringify({ // 500
                         err: true,
                         url: request.url,
