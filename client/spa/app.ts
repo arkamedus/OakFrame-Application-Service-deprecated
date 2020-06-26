@@ -15,6 +15,8 @@ import {CounterController} from "./controller/CounterController";
 import {GraphController} from "./controller/GraphController";
 import {Searcher} from "../../lib/model/Searcher";
 import {CameraController} from "./controller/CameraController";
+import {AskController} from "./controller/AskController";
+import {PlayController} from "./controller/PlayController";
 
 export const app: ApplicationRouter = new ApplicationRouter();
 
@@ -31,6 +33,8 @@ let controller_contact = new ContactController();
 let controller_counter = new CounterController();
 let controller_graph = new GraphController();
 let controller_camera = new CameraController();
+let controller_ask = new AskController();
+let controller_play = new PlayController();
 
 export function generateStateTemplate() {
     let query = window.location.pathname.split("/")[2] || "";
@@ -59,6 +63,8 @@ app.use('/contact', controller_contact.use);
 app.use('/counter', controller_counter.use);
 app.use('/graph', controller_graph.use);
 app.use('/camera', controller_camera.use);
+app.use('/ask', controller_ask.use);
+app.use('/play', controller_play.use);
 
 app.use('/search/?(.+)?', function () {
     return new Promise(function (resolve, reject) {
